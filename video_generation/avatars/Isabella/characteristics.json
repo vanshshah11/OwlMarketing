@@ -1,0 +1,25 @@
+{
+    "name": "Isabella",
+    "scenario": "Laughing - amused and joyful",
+    "features": {
+        "appearance": "white, elegant, green eyes, light brown hair",
+        "scenario_detail": "Laughing - amused and joyful",
+        "unique_trait": "Isabella has a distinctive look: white, elegant, green eyes, light brown hair"
+    },
+    "emotion_range": [
+        "surprised",
+        "shocked",
+        "amazed",
+        "astonished",
+        "excited",
+        "mind-blown",
+        "awestruck",
+        "thrilled",
+        "stunned",
+        "speechless",
+        "happy",
+        "confident",
+        "curious"
+    ],
+    "current_emotion": "surprised"
+}

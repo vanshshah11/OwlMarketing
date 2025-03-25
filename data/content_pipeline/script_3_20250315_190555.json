@@ -1,0 +1,45 @@
+{
+  "title": "Optimal AI Meal Planning Demo",
+  "target_audience": "weight_management",
+  "key_message": "User-friendly interface",
+  "content": "Someone in my fitness group shared Optimal AI and we're all FREAKING OUT about what it can do! showing how Optimal AI helps with meal planning",
+  "caption": "Someone in my fitness group shared Optimal AI and we're all FREAKING OUT about what it can do! #OptimalAI #CalorieTracking #weight_management",
+  "style": {
+    "energy_level": 0.8899550839797059,
+    "emotion": "calm"
+  },
+  "scenes": [
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "Someone in my fitness group shared Optimal AI and we're all FREAKING OUT about what it can do!"
+    },
+    {
+      "duration": 4,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1"
+    },
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "I've never stuck with anything until {app_name} - it's just so effortless!"
+    },
+    {
+      "duration": 5,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "I had to share {app_name} because it's too good to keep secret!"
+    }
+  ]
+}

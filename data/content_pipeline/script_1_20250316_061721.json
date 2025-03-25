@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Meal Planning Demo",
+  "target_audience": "busy_professionals",
+  "key_message": "Time-saving features",
+  "content": "Frustrated with other calorie apps? Optimal AI solves the problem showing how Optimal AI helps with meal planning",
+  "caption": "Frustrated with other calorie apps? Optimal AI solves the problem #OptimalAI #CalorieTracking #busy_professionals",
+  "style": {
+    "energy_level": 0.8483163617028927,
+    "emotion": "enthusiastic"
+  },
+  "scenes": [
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "Frustrated with other calorie apps? Optimal AI solves the problem",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 3.66155013086596,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "The complete nutrition picture delivered at a glance",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 4.57693766358245,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "Join thousands who've simplified their tracking with Optimal AI",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

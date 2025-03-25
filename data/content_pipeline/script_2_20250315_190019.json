@@ -1,0 +1,45 @@
+{
+  "title": "Optimal AI Meal Planning Demo",
+  "target_audience": "fitness_enthusiasts",
+  "key_message": "Accurate nutrition data",
+  "content": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me showing how Optimal AI helps with meal planning",
+  "caption": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me #OptimalAI #CalorieTracking #fitness_enthusiasts",
+  "style": {
+    "energy_level": 0.6620030337245577,
+    "emotion": "energetic"
+  },
+  "scenes": [
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me"
+    },
+    {
+      "duration": 4,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1"
+    },
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "The accuracy of {app_name} is UNREAL - it knows exactly what I'm eating!"
+    },
+    {
+      "duration": 5,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "Trust me, {app_name} is worth downloading RIGHT NOW!"
+    }
+  ]
+}

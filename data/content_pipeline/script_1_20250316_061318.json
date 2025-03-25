@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Progress Tracking Demo",
+  "target_audience": "weight_management",
+  "key_message": "User-friendly interface",
+  "content": "Just discovered Optimal AI and I'm literally speechless... HOW is this even possible?! showing how Optimal AI helps with progress tracking",
+  "caption": "Just discovered Optimal AI and I'm literally speechless... HOW is this even possible?! #OptimalAI #CalorieTracking #weight_management",
+  "style": {
+    "energy_level": 0.8914806759046715,
+    "emotion": "excited"
+  },
+  "scenes": [
+    {
+      "duration": 5.884634138891721,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "Just discovered Optimal AI and I'm literally speechless... HOW is this even possible?!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 7.846178851855628,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes progress tracking super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 10.0,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "I saved SO much time using {app_name} - it does everything automatically!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 5.0,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "Trust me, {app_name} is worth downloading RIGHT NOW!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

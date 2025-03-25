@@ -1,0 +1,269 @@
+{
+    "api_keys": {
+        "openai": "",
+        "google": "",
+        "search_engine_id": ""
+    },
+    "content_settings": {
+        "platforms": ["tiktok", "instagram", "youtube"],
+        "video_duration": {
+            "tiktok": {
+                "min": 5,
+                "max": 18
+            },
+            "instagram": {
+                "min": 5,
+                "max": 18
+            },
+            "youtube": {
+                "min": 5,
+                "max": 18
+            }
+        },
+        "posting_frequency": {
+            "videos_per_avatar_per_day": 2,
+            "tiktok": "daily",
+            "instagram": "daily",
+            "youtube": "daily"
+        },
+        "content_types": [
+            "app_demo",
+            "user_story",
+            "feature_highlight",
+            "tips_and_tricks"
+        ]
+    },
+    "video_settings": {
+        "resolution": {
+            "tiktok": "1080x1920",
+            "instagram": "1080x1920",
+            "youtube": "1080x1920"
+        },
+        "fps": 30,
+        "music": {
+            "library_path": "assets/music",
+            "default_tracks": [
+                "upbeat_energy",
+                "trendy_pop",
+                "modern_hiphop"
+            ],
+            "volume": 0.8
+        },
+        "transitions": [
+            "fade",
+            "slide",
+            "zoom"
+        ],
+        "voice_enabled": false
+    },
+    "avatar_settings": {
+        "replacement_enabled": true,
+        "default_avatar": "sarah",
+        "pose_model": "movenet",
+        "avatars": {
+            "sarah": {
+                "name": "Fitness Enthusiast Sarah",
+                "content_types": ["workout", "gym", "fitness"],
+                "style": "energetic",
+                "features": {
+                    "appearance": "white, thin, brown eyes, blonde hair",
+                    "scenario_detail": "In car - driving a convertible",
+                    "unique_trait": "Sarah has a distinctive look: white, thin, brown eyes, blonde hair"
+                },
+                "social_accounts": {
+                    "tiktok": "@sarah_fitness_tips",
+                    "instagram": "@sarah.fitness.tips",
+                    "youtube": "@SarahFitnessTips"
+                }
+            },
+            "emily": {
+                "name": "Emily",
+                "content_types": ["lifestyle", "health", "wellness"],
+                "style": "modern",
+                "features": {
+                    "appearance": "white, thin, brown eyes, blonde hair",
+                    "scenario_detail": "In car - driving a convertible",
+                    "unique_trait": "Emily has a distinctive look: white, thin, brown eyes, blonde hair"
+                },
+                "social_accounts": {
+                    "tiktok": "@emily_health_life",
+                    "instagram": "@emily.health.life",
+                    "youtube": "@EmilyHealthLife"
+                }
+            },
+            "sophia": {
+                "name": "Sophia",
+                "content_types": ["fitness", "nutrition", "wellness"],
+                "style": "energetic",
+                "features": {
+                    "appearance": "black, athletic, dark eyes, curly hair",
+                    "scenario_detail": "Hand on mouth - shocked expression",
+                    "unique_trait": "Sophia has a distinctive look: black, athletic, dark eyes, curly hair"
+                },
+                "social_accounts": {
+                    "tiktok": "@sophia_fitness",
+                    "instagram": "@sophia.fitness",
+                    "youtube": "@SophiaFitness"
+                }
+            },
+            "olivia": {
+                "name": "Olivia",
+                "content_types": ["lifestyle", "health", "wellness"],
+                "style": "elegant",
+                "features": {
+                    "appearance": "white, slender, blue eyes, red hair",
+                    "scenario_detail": "Smiling - happy and cheerful",
+                    "unique_trait": "Olivia has a distinctive look: white, slender, blue eyes, red hair"
+                },
+                "social_accounts": {
+                    "tiktok": "@olivia_healthy_living",
+                    "instagram": "@olivia.healthy.living",
+                    "youtube": "@OliviaHealthyLiving"
+                }
+            },
+            "emma": {
+                "name": "Emma",
+                "content_types": ["lifestyle", "health", "wellness"],
+                "style": "modern",
+                "features": {
+                    "appearance": "asian, petite, almond eyes, black hair",
+                    "scenario_detail": "Serious - looking confident",
+                    "unique_trait": "Emma has a distinctive look: asian, petite, almond eyes, black hair"
+                },
+                "social_accounts": {
+                    "tiktok": "@emma_health_tips",
+                    "instagram": "@emma.health.tips",
+                    "youtube": "@EmmaHealthTips"
+                }
+            },
+            "ava": {
+                "name": "Ava",
+                "content_types": ["fitness", "nutrition", "wellness"],
+                "style": "energetic",
+                "features": {
+                    "appearance": "hispanic, curvy, hazel eyes, brunette",
+                    "scenario_detail": "Winking - playful and flirty",
+                    "unique_trait": "Ava has a distinctive look: hispanic, curvy, hazel eyes, brunette"
+                },
+                "social_accounts": {
+                    "tiktok": "@ava_fit_tips",
+                    "instagram": "@ava.fit.tips",
+                    "youtube": "@AvaFitTips"
+                }
+            },
+            "isabella": {
+                "name": "Isabella",
+                "content_types": ["lifestyle", "health", "wellness"],
+                "style": "elegant",
+                "features": {
+                    "appearance": "white, elegant, green eyes, light brown hair",
+                    "scenario_detail": "Laughing - amused and joyful",
+                    "unique_trait": "Isabella has a distinctive look: white, elegant, green eyes, light brown hair"
+                },
+                "social_accounts": {
+                    "tiktok": "@isabella_wellness",
+                    "instagram": "@isabella.wellness",
+                    "youtube": "@IsabellaWellness"
+                }
+            },
+            "mia": {
+                "name": "Mia",
+                "content_types": ["fitness", "nutrition", "wellness"],
+                "style": "energetic",
+                "features": {
+                    "appearance": "african american, athletic, brown eyes, short hair",
+                    "scenario_detail": "Surprised - with raised eyebrows",
+                    "unique_trait": "Mia has a distinctive look: african american, athletic, brown eyes, short hair"
+                },
+                "social_accounts": {
+                    "tiktok": "@mia_fitness_journey",
+                    "instagram": "@mia.fitness.journey",
+                    "youtube": "@MiaFitnessJourney"
+                }
+            },
+            "charlotte": {
+                "name": "Charlotte",
+                "content_types": ["lifestyle", "health", "wellness"],
+                "style": "elegant",
+                "features": {
+                    "appearance": "white, tall, blue eyes, blonde hair",
+                    "scenario_detail": "Smiling - happy and cheerful",
+                    "unique_trait": "Charlotte has a distinctive look: white, tall, blue eyes, blonde hair"
+                },
+                "social_accounts": {
+                    "tiktok": "@charlotte_health",
+                    "instagram": "@charlotte.health",
+                    "youtube": "@CharlotteHealth"
+                }
+            },
+            "amelia": {
+                "name": "Amelia",
+                "content_types": ["lifestyle", "health", "wellness"],
+                "style": "modern",
+                "features": {
+                    "appearance": "mixed, average build, green eyes, dark hair",
+                    "scenario_detail": "In conversation - gesturing with hands",
+                    "unique_trait": "Amelia has a distinctive look: mixed, average build, green eyes, dark hair"
+                },
+                "social_accounts": {
+                    "tiktok": "@amelia_wellness_tips",
+                    "instagram": "@amelia.wellness.tips",
+                    "youtube": "@AmeliaWellnessTips"
+                }
+            },
+            "harper": {
+                "name": "Harper",
+                "content_types": ["fitness", "nutrition", "wellness"],
+                "style": "energetic",
+                "features": {
+                    "appearance": "white, slender, grey eyes, red hair",
+                    "scenario_detail": "Casual - relaxed posture with a cool vibe",
+                    "unique_trait": "Harper has a distinctive look: white, slender, grey eyes, red hair"
+                },
+                "social_accounts": {
+                    "tiktok": "@harper_fit_life",
+                    "instagram": "@harper.fit.life",
+                    "youtube": "@HarperFitLife"
+                }
+            }
+        },
+        "training_videos_mapping": {
+            "sarah": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"],
+            "emily": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"],
+            "sophia": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"],
+            "olivia": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"],
+            "emma": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"],
+            "ava": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"],
+            "isabella": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"],
+            "mia": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"],
+            "charlotte": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"],
+            "amelia": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"],
+            "harper": ["@cal.ai0 videos", "@cal.ai4 videos","@cal.aiapp videos", "@cal.ai.app videos","@cal-2", "@cal-3"]
+        }
+    },
+    "app_features": {
+        "key_features": [
+            "real_time_calorie_tracking",
+            "meal_planning",
+            "restaurant_menu_scanning",
+            "progress_tracking",
+            "social_sharing"
+        ],
+        "target_audience": [
+            "health_conscious",
+            "fitness_enthusiasts",
+            "busy_professionals",
+            "weight_management"
+        ]
+    },
+    "content_guidelines": {
+        "tone": "authentic, relatable, educational",
+        "style": "casual, engaging, informative",
+        "key_messages": [
+            "Easy calorie tracking",
+            "Time-saving features",
+            "Accurate nutrition data",
+            "User-friendly interface"
+        ]
+    }
+} 

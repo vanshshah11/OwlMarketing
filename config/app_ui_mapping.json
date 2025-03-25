@@ -1,0 +1,118 @@
+{
+  "features": [
+    {
+      "name": "real_time_calorie_tracking",
+      "screenshots": [
+        "assets/app_ui/screenshots/camera/camera_scan_pizza.PNG",
+        "assets/app_ui/screenshots/camera/camera_scan_salad.PNG",
+        "assets/app_ui/screenshots/camera/camera_scan_apple.PNG",
+        "assets/app_ui/screenshots/camera/camera_scan_burger.PNG",
+        "assets/app_ui/screenshots/results/results_pizza.PNG",
+        "assets/app_ui/screenshots/results/results_salad.PNG",
+        "assets/app_ui/screenshots/results/results_apple.PNG",
+        "assets/app_ui/screenshots/results/results_hamburger.PNG",
+        "assets/app_ui/screenshots/home_afterlog/home_pizza_logged.PNG",
+        "assets/app_ui/screenshots/home_afterlog/home_salad_logged.PNG",
+        "assets/app_ui/screenshots/home_afterlog/home_apple_logged.PNG",
+        "assets/app_ui/screenshots/home_beforelog/home_nothing_logged.PNG"
+      ],
+      "recordings": [
+        "assets/app_ui/recordings/realtime_tracking_pizza.mp4",
+        "assets/app_ui/recordings/realtime_tracking_salad.mp4",
+        "assets/app_ui/recordings/realtime_tracking_apple.mp4",
+        "assets/app_ui/recordings/realtime_tracking_burger.mp4"
+      ],
+      "description": "Real-time tracking of calories with instant results"
+    }
+  ],
+  "screens": [
+    {
+      "name": "home_screen",
+      "screenshots": [
+        "assets/app_ui/screenshots/home_beforelog/home_nothing_logged.PNG",
+        "assets/app_ui/screenshots/home_afterlog/home_pizza_logged.PNG",
+        "assets/app_ui/screenshots/home_afterlog/home_salad_logged.PNG",
+        "assets/app_ui/screenshots/home_afterlog/home_apple_logged.PNG"
+      ],
+      "description": "Main dashboard of the app"
+    },
+    {
+      "name": "camera_interface",
+      "screenshots": [
+        "assets/app_ui/screenshots/camera/camera_scan_blank.PNG",
+        "assets/app_ui/screenshots/camera/camera_scan_pizza.PNG",
+        "assets/app_ui/screenshots/camera/camera_scan_salad.PNG",
+        "assets/app_ui/screenshots/camera/camera_scan_apple.PNG",
+        "assets/app_ui/screenshots/camera/camera_scan_burger.PNG"
+      ],
+      "description": "Camera interface for scanning food"
+    },
+    {
+      "name": "results",
+      "screenshots": [
+        "assets/app_ui/screenshots/results/results_pizza.PNG",
+        "assets/app_ui/screenshots/results/results_salad.PNG",
+        "assets/app_ui/screenshots/results/results_apple.PNG",
+        "assets/app_ui/screenshots/results/results_hamburger.PNG"
+      ],
+      "description": "Results after scanning food"
+    },
+    {
+      "name": "progress",
+      "screenshots": [
+        "assets/app_ui/screenshots/progress/daily_summary_01.png",
+        "assets/app_ui/screenshots/progress/calories_chart_01.png",
+        "assets/app_ui/screenshots/progress/nutrients_breakdown_01.png"
+      ],
+      "description": "Progress tracking charts and stats"
+    },
+    {
+      "name": "settings",
+      "screenshots": [
+        "assets/app_ui/screenshots/home/settings_01.png",
+        "assets/app_ui/screenshots/home/profile_01.png"
+      ],
+      "description": "App settings and user profile"
+    }
+  ],
+  "demo_sequences": [
+    {
+      "name": "quick_scan_pizza",
+      "recording": "assets/app_ui/recordings/realtime_tracking_pizza.mp4",
+      "description": "Quick scanning of a pizza with real-time calorie tracking",
+      "duration": 4.0
+    },
+    {
+      "name": "quick_scan_salad",
+      "recording": "assets/app_ui/recordings/realtime_tracking_salad.mp4",
+      "description": "Quick scanning of a salad with real-time calorie tracking",
+      "duration": 4.0
+    },
+    {
+      "name": "quick_scan_apple",
+      "recording": "assets/app_ui/recordings/realtime_tracking_apple.mp4",
+      "description": "Quick scanning of an apple with real-time calorie tracking",
+      "duration": 4.0
+    },
+    {
+      "name": "quick_scan_burger",
+      "recording": "assets/app_ui/recordings/realtime_tracking_burger.mp4",
+      "description": "Quick scanning of a burger with real-time calorie tracking",
+      "duration": 4.0
+    }
+  ],
+  "brand": {
+    "app_name": "Optimal AI",
+    "logo": "assets/app_ui/brand/OptimalAI_logo.png",
+    "app_icon": "assets/app_ui/brand/OptimalAI_logo.png",
+    "colors": {
+      "primary": "#4a90e2",
+      "secondary": "#50e3c2",
+      "background": "#f5f8fa"
+    },
+    "fonts": {
+      "primary": "Roboto",
+      "secondary": "Montserrat"
+    }
+  }
+}

@@ -1,0 +1,434 @@
+{
+  "app_name": "Optimal AI",
+  "version": "1.0.0",
+  "color_scheme": {
+    "primary": "#000000",
+    "secondary": "#CECECE",
+    "background": "#EBE9E8",
+    "text": "#000000",
+    "text_secondary": "#666666",
+    "accent": "#FF9500",
+    "success": "#34C759",
+    "warning": "#FF9F0A",
+    "error": "#FF3B30",
+    "macro": {
+      "protein": "#FF3B30",
+      "carbs": "#FF9500",
+      "fat": "#007AFF"
+    }
+  },
+  "fonts": {
+    "primary": "-apple-system",
+    "secondary": "-apple-system",
+    "weights": {
+      "light": 300,
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    }
+  },
+  "ui_elements": {
+    "button": {
+      "primary": {
+        "background": "#000000",
+        "text": "#ffffff",
+        "border_radius": 8,
+        "padding": [12, 24]
+      },
+      "secondary": {
+        "background": "#CECECE",
+        "text": "#000000",
+        "border_radius": 8,
+        "padding": [12, 24]
+      },
+      "outline": {
+        "background": "transparent",
+        "text": "#000000",
+        "border": "1px solid #000000",
+        "border_radius": 8,
+        "padding": [12, 24]
+      }
+    },
+    "card": {
+      "background": "#FFFFFF",
+      "border_radius": 12,
+      "shadow": "0 2px 10px rgba(0, 0, 0, 0.1)",
+      "padding": 16
+    },
+    "input": {
+      "background": "#FFFFFF",
+      "text": "#000000",
+      "placeholder": "#666666",
+      "border": "1px solid #E5E5EA",
+      "border_radius": 8,
+      "padding": [12, 16]
+    },
+    "calorie_circle": {
+      "border": "4px solid #FF9500",
+      "background": "#E5E5E5",
+      "active_background": "#FF9500",
+      "text_value": "#000000",
+      "text_label": "#666666"
+    },
+    "progress_bar": {
+      "protein": {
+        "background": "#E5E5E5",
+        "fill": "#FF3B30"
+      },
+      "carbs": {
+        "background": "#E5E5E5",
+        "fill": "#FF9500"
+      },
+      "fat": {
+        "background": "#E5E5E5",
+        "fill": "#007AFF"
+      }
+    }
+  },
+  "screens": {
+    "home_screen": {
+      "layout": "vertical_scroll",
+      "variants": {
+        "before_scan": {
+          "source_screenshots": ["assets/app_ui/screenshots/home_beforelog/home_nothing_logged.PNG"]
+        },
+        "after_scan": {
+          "source_screenshots": [
+            "assets/app_ui/screenshots/home_afterlog/home_pizza_logged.PNG",
+            "assets/app_ui/screenshots/home_afterlog/home_salad_logged.PNG",
+            "assets/app_ui/screenshots/home_afterlog/home_apple_logged.PNG"
+          ]
+        }
+      },
+      "elements": [
+        {
+          "type": "header",
+          "title": "Optimal AI",
+          "font_style": "apptitle",
+          "alignment": "left",
+          "padding_top": 12
+        },
+        {
+          "type": "streak_card",
+          "style": "rounded",
+          "background": "#FFFFFF",
+          "shadow": true,
+          "margin": [16, 8]
+        },
+        {
+          "type": "date_selector",
+          "style": "horizontal",
+          "background": "transparent",
+          "selected_style": {
+            "background": "#000000",
+            "text": "#FFFFFF"
+          },
+          "unselected_style": {
+            "background": "transparent",
+            "text": "#000000"
+          }
+        },
+        {
+          "type": "calorie_summary",
+          "style": "frosted_glass",
+          "background": "#FFFFFF",
+          "shadow": true,
+          "border_radius": 16,
+          "layout": "row",
+          "circle_position": "right",
+          "text_position": "left"
+        },
+        {
+          "type": "macro_container",
+          "layout": "row",
+          "spacing": 8,
+          "items": [
+            {
+              "title": "Protein left",
+              "color": "#FF3B30"
+            },
+            {
+              "title": "Carbs left",
+              "color": "#FF9500"
+            },
+            {
+              "title": "Fat left",
+              "color": "#007AFF"
+            }
+          ]
+        },
+        {
+          "type": "section_title",
+          "title": "Recently eaten",
+          "font_style": "title3",
+          "alignment": "left",
+          "margin_top": 16
+        },
+        {
+          "type": "recent_meals",
+          "empty_state": {
+            "text": "No meals logged today",
+            "text_style": "body"
+          },
+          "item_style": {
+            "background": "#FFFFFF",
+            "border_radius": 12,
+            "shadow": true,
+            "padding": 12
+          }
+        }
+      ]
+    },
+    "camera_interface": {
+      "layout": "full_screen",
+      "variants": {
+        "blank": {
+          "source_screenshots": ["assets/app_ui/screenshots/camera/camera_scan_blank.PNG"]
+        },
+        "scanning": {
+          "source_screenshots": [
+            "assets/app_ui/screenshots/camera/camera_scan_pizza.PNG",
+            "assets/app_ui/screenshots/camera/camera_scan_salad.PNG",
+            "assets/app_ui/screenshots/camera/camera_scan_apple.PNG",
+            "assets/app_ui/screenshots/camera/camera_scan_burger.PNG"
+          ]
+        }
+      },
+      "elements": [
+        {
+          "type": "header",
+          "title": "Capture Food",
+          "font_style": "headline",
+          "background": "transparent",
+          "text_color": "#FFFFFF"
+        },
+        {
+          "type": "back_button",
+          "position": "top_left",
+          "icon": "chevron.left",
+          "color": "#FFFFFF",
+          "background": "rgba(255, 255, 255, 0.3)",
+          "border_radius": 20
+        },
+        {
+          "type": "framing_guide",
+          "border_color": "rgba(255, 255, 255, 0.3)",
+          "corner_indicators": true,
+          "position": "center",
+          "size_percent": 70
+        },
+        {
+          "type": "flash_button",
+          "position": "bottom_left",
+          "icon": "bolt.fill",
+          "color": "#FFFFFF",
+          "background": "rgba(255, 255, 255, 0.3)",
+          "border_radius": 20
+        },
+        {
+          "type": "capture_button",
+          "position": "bottom_center",
+          "size": 72,
+          "background": "rgba(255, 255, 255, 0.5)",
+          "inner_circle": true,
+          "inner_color": "#FFFFFF"
+        }
+      ]
+    },
+    "results_screen": {
+      "layout": "vertical_scroll",
+      "variants": {
+        "result": {
+          "source_screenshots": [
+            "assets/app_ui/screenshots/results/results_pizza.PNG",
+            "assets/app_ui/screenshots/results/results_salad.PNG",
+            "assets/app_ui/screenshots/results/results_apple.PNG",
+            "assets/app_ui/screenshots/results/results_hamburger.PNG"
+          ]
+        }
+      },
+      "elements": [
+        {
+          "type": "header",
+          "title": "Food Details",
+          "font_style": "headline",
+          "alignment": "center",
+          "show_back": true
+        },
+        {
+          "type": "food_image",
+          "size": "large",
+          "position": "top",
+          "border_radius": 12,
+          "shadow": true
+        },
+        {
+          "type": "food_name",
+          "font_style": "title2",
+          "alignment": "center",
+          "margin_top": 16
+        },
+        {
+          "type": "calorie_value",
+          "font_style": "bigTitle",
+          "alignment": "center",
+          "show_unit": true
+        },
+        {
+          "type": "metric_cards",
+          "layout": "horizontal",
+          "cards": [
+            {
+              "icon": "p.circle.fill",
+              "label": "Protein",
+              "color": "#FF3B30"
+            },
+            {
+              "icon": "c.circle.fill",
+              "label": "Carbs",
+              "color": "#FF9500"
+            },
+            {
+              "icon": "f.circle.fill",
+              "label": "Fat",
+              "color": "#007AFF"
+            }
+          ],
+          "card_style": {
+            "background": "#FFFFFF",
+            "border_radius": 12,
+            "shadow": true,
+            "padding": 12
+          }
+        },
+        {
+          "type": "portion_control",
+          "style": "stepper",
+          "background": "#FFFFFF",
+          "border_radius": 12,
+          "margin_top": 16
+        },
+        {
+          "type": "nutrition_details",
+          "layout": "list",
+          "background": "#FFFFFF",
+          "border_radius": 12,
+          "shadow": true,
+          "margin_top": 16
+        },
+        {
+          "type": "primary_button",
+          "text": "Add to Log",
+          "position": "bottom",
+          "style": {
+            "background": "#000000",
+            "text_color": "#FFFFFF",
+            "border_radius": 8,
+            "full_width": true
+          }
+        }
+      ]
+    },
+    "food_log": {
+      "layout": "vertical_list",
+      "elements": [
+        {
+          "type": "header",
+          "title": "Food Log",
+          "show_date": true,
+          "font_style": "headline"
+        },
+        {
+          "type": "meal_section",
+          "title": "Breakfast",
+          "show_total_calories": true,
+          "item_style": {
+            "background": "#FFFFFF",
+            "border_radius": 12,
+            "shadow": true,
+            "padding": 12
+          }
+        },
+        {
+          "type": "meal_section",
+          "title": "Lunch",
+          "show_total_calories": true,
+          "item_style": {
+            "background": "#FFFFFF",
+            "border_radius": 12,
+            "shadow": true,
+            "padding": 12
+          }
+        },
+        {
+          "type": "meal_section",
+          "title": "Dinner",
+          "show_total_calories": true,
+          "item_style": {
+            "background": "#FFFFFF",
+            "border_radius": 12,
+            "shadow": true,
+            "padding": 12
+          }
+        },
+        {
+          "type": "meal_section",
+          "title": "Snacks",
+          "show_total_calories": true,
+          "item_style": {
+            "background": "#FFFFFF",
+            "border_radius": 12,
+            "shadow": true,
+            "padding": 12
+          }
+        },
+        {
+          "type": "daily_summary",
+          "position": "bottom",
+          "show_remaining_calories": true,
+          "style": {
+            "background": "#FFFFFF",
+            "border_radius": 12,
+            "shadow": true,
+            "padding": 16
+          }
+        }
+      ]
+    }
+  },
+  "common_food_items": [
+    {
+      "name": "Pizza",
+      "calories": 285,
+      "protein": 12,
+      "carbs": 36,
+      "fat": 10,
+      "image_path": "assets/app_ui/screenshots/results/results_pizza.PNG"
+    },
+    {
+      "name": "Caesar Salad",
+      "calories": 150,
+      "protein": 5,
+      "carbs": 7,
+      "fat": 12,
+      "image_path": "assets/app_ui/screenshots/results/results_salad.PNG"
+    },
+    {
+      "name": "Apple",
+      "calories": 95,
+      "protein": 0.5,
+      "carbs": 25,
+      "fat": 0.3,
+      "image_path": "assets/app_ui/screenshots/results/results_apple.PNG"
+    },
+    {
+      "name": "Hamburger",
+      "calories": 354,
+      "protein": 20,
+      "carbs": 30,
+      "fat": 18,
+      "image_path": "assets/app_ui/screenshots/results/results_hamburger.PNG"
+    }
+  ]
+} 

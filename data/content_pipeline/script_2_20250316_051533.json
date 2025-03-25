@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Restaurant Menu Scanning Demo",
+  "target_audience": "weight_management",
+  "key_message": "Easy calorie tracking",
+  "content": "I thought I'd seen everything until my friend showed me Optimal AI... I'm still in shock! showing how Optimal AI helps with restaurant menu scanning",
+  "caption": "I thought I'd seen everything until my friend showed me Optimal AI... I'm still in shock! #OptimalAI #CalorieTracking #weight_management",
+  "style": {
+    "energy_level": 0.8274160945905027,
+    "emotion": "excited"
+  },
+  "scenes": [
+    {
+      "duration": 5.884634138891721,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "I thought I'd seen everything until my friend showed me Optimal AI... I'm still in shock!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 7.846178851855628,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes restaurant menu scanning super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 10.0,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "I've never stuck with anything until {app_name} - it's just so effortless!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 5.0,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "I had to share {app_name} because it's too good to keep secret!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

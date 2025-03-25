@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Progress Tracking Demo",
+  "target_audience": "fitness_enthusiasts",
+  "key_message": "Time-saving features",
+  "content": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me showing how Optimal AI helps with progress tracking",
+  "caption": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me #OptimalAI #CalorieTracking #fitness_enthusiasts",
+  "style": {
+    "energy_level": 0.8638118183890966,
+    "emotion": "energetic"
+  },
+  "scenes": [
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 3.66155013086596,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes progress tracking super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "I saved SO much time using Optimal AI - it does everything automatically!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 4.57693766358245,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "I'm literally telling everyone about Optimal AI - it's that incredible!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

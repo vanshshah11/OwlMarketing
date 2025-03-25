@@ -1,0 +1,188 @@
+[
+  {
+    "title": "Optimal AI Restaurant Menu Scanning Demo",
+    "target_audience": "busy_professionals",
+    "key_message": "Time-saving features",
+    "content": "I was tracking my meals the hard way for YEARS until I found Optimal AI... my mind is blown! showing how Optimal AI helps with restaurant menu scanning",
+    "caption": "I was tracking my meals the hard way for YEARS until I found Optimal AI... my mind is blown! #OptimalAI #CalorieTracking #busy_professionals",
+    "style": {
+      "energy_level": 0.8108439193278844,
+      "emotion": "enthusiastic"
+    },
+    "scenes": [
+      {
+        "duration": 5.884634138891721,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "I was tracking my meals the hard way for YEARS until I found Optimal AI... my mind is blown!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 7.846178851855628,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes restaurant menu scanning super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 10.0,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "No more guessing or manual tracking - {app_name} literally changed my life!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 5.0,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "Don't wait like I did - grab {app_name} now and see for yourself!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  },
+  {
+    "title": "Optimal AI Progress Tracking Demo",
+    "target_audience": "weight_management",
+    "key_message": "User-friendly interface",
+    "content": "When my trainer showed me Optimal AI I couldn't believe it was real! Game. Changer. showing how Optimal AI helps with progress tracking",
+    "caption": "When my trainer showed me Optimal AI I couldn't believe it was real! Game. Changer. #OptimalAI #CalorieTracking #weight_management",
+    "style": {
+      "energy_level": 0.8971014618977564,
+      "emotion": "enthusiastic"
+    },
+    "scenes": [
+      {
+        "duration": 5.884634138891721,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "When my trainer showed me Optimal AI I couldn't believe it was real! Game. Changer.",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 7.846178851855628,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes progress tracking super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 10.0,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "No more guessing or manual tracking - {app_name} literally changed my life!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 5.0,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "I'm literally telling everyone about {app_name} - it's that incredible!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  },
+  {
+    "title": "Optimal AI Progress Tracking Demo",
+    "target_audience": "weight_management",
+    "key_message": "Easy calorie tracking",
+    "content": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?! showing how Optimal AI helps with progress tracking",
+    "caption": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?! #OptimalAI #CalorieTracking #weight_management",
+    "style": {
+      "energy_level": 0.7797195331200043,
+      "emotion": "calm"
+    },
+    "scenes": [
+      {
+        "duration": 5.884634138891721,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 7.846178851855628,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes progress tracking super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 10.0,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "I've never stuck with anything until {app_name} - it's just so effortless!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 5.0,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "I had to share {app_name} because it's too good to keep secret!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  }
+]

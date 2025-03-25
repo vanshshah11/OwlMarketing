@@ -1,0 +1,188 @@
+[
+  {
+    "title": "Optimal AI Social Sharing Demo",
+    "target_audience": "fitness_enthusiasts",
+    "key_message": "Easy calorie tracking",
+    "content": "Guys stop scrolling!! I just discovered something that blew my mind \ud83e\udd2f Optimal AI is a game changer! showing how Optimal AI helps with social sharing",
+    "caption": "Guys stop scrolling!! I just discovered something that blew my mind \ud83e\udd2f Optimal AI is a game changer! #OptimalAI #CalorieTracking #fitness_enthusiasts",
+    "style": {
+      "energy_level": 0.6519480003616859,
+      "emotion": "energetic"
+    },
+    "scenes": [
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "Guys stop scrolling!! I just discovered something that blew my mind \ud83e\udd2f Optimal AI is a game changer!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 3.66155013086596,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes social sharing super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "The accuracy of Optimal AI is UNREAL - it knows exactly what I'm eating!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 4.57693766358245,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "I had to share Optimal AI because it's too good to keep secret!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  },
+  {
+    "title": "Optimal AI Meal Planning Demo",
+    "target_audience": "fitness_enthusiasts",
+    "key_message": "Easy calorie tracking",
+    "content": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?! showing how Optimal AI helps with meal planning",
+    "caption": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?! #OptimalAI #CalorieTracking #fitness_enthusiasts",
+    "style": {
+      "energy_level": 0.8644199372874358,
+      "emotion": "excited"
+    },
+    "scenes": [
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 3.66155013086596,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "The accuracy of Optimal AI is UNREAL - it knows exactly what I'm eating!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 4.57693766358245,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "I had to share Optimal AI because it's too good to keep secret!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  },
+  {
+    "title": "Optimal AI Progress Tracking Demo",
+    "target_audience": "busy_professionals",
+    "key_message": "User-friendly interface",
+    "content": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me showing how Optimal AI helps with progress tracking",
+    "caption": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me #OptimalAI #CalorieTracking #busy_professionals",
+    "style": {
+      "energy_level": 0.8486596321732184,
+      "emotion": "calm"
+    },
+    "scenes": [
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 3.66155013086596,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes progress tracking super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "My progress went through the ROOF once I started using Optimal AI!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 4.57693766358245,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "Trust me, Optimal AI is worth downloading RIGHT NOW!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  }
+]

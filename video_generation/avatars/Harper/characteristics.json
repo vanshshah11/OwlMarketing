@@ -1,0 +1,25 @@
+{
+    "name": "Harper",
+    "scenario": "Casual - relaxed posture with a cool vibe",
+    "features": {
+        "appearance": "white, slender, grey eyes, red hair",
+        "scenario_detail": "Casual - relaxed posture with a cool vibe",
+        "unique_trait": "Harper has a distinctive look: white, slender, grey eyes, red hair"
+    },
+    "emotion_range": [
+        "surprised",
+        "shocked",
+        "amazed",
+        "astonished",
+        "excited",
+        "mind-blown",
+        "awestruck",
+        "thrilled",
+        "stunned",
+        "speechless",
+        "happy",
+        "confident",
+        "curious"
+    ],
+    "current_emotion": "surprised"
+}

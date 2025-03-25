@@ -1,0 +1,25 @@
+{
+    "name": "Charlotte",
+    "scenario": "Thinking - hand on chin in contemplation",
+    "features": {
+        "appearance": "white, tall, blue eyes, blonde hair",
+        "scenario_detail": "Thinking - hand on chin in contemplation",
+        "unique_trait": "Charlotte has a distinctive look: white, tall, blue eyes, blonde hair"
+    },
+    "emotion_range": [
+        "surprised",
+        "shocked",
+        "amazed",
+        "astonished",
+        "excited",
+        "mind-blown",
+        "awestruck",
+        "thrilled",
+        "stunned",
+        "speechless",
+        "happy",
+        "confident",
+        "curious"
+    ],
+    "current_emotion": "surprised"
+}

@@ -1,0 +1,25 @@
+{
+    "name": "Emma",
+    "scenario": "Serious - looking confident",
+    "features": {
+        "appearance": "asian, petite, almond eyes, black hair",
+        "scenario_detail": "Serious - looking confident",
+        "unique_trait": "Emma has a distinctive look: asian, petite, almond eyes, black hair"
+    },
+    "emotion_range": [
+        "surprised",
+        "shocked",
+        "amazed",
+        "astonished",
+        "excited",
+        "mind-blown",
+        "awestruck",
+        "thrilled",
+        "stunned",
+        "speechless",
+        "happy",
+        "confident",
+        "curious"
+    ],
+    "current_emotion": "surprised"
+}

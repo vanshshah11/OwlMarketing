@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Social Sharing Demo",
+  "target_audience": "fitness_enthusiasts",
+  "key_message": "Easy calorie tracking",
+  "content": "Guys stop scrolling!! I just discovered something that blew my mind \ud83e\udd2f Optimal AI is a game changer! showing how Optimal AI helps with social sharing",
+  "caption": "Guys stop scrolling!! I just discovered something that blew my mind \ud83e\udd2f Optimal AI is a game changer! #OptimalAI #CalorieTracking #fitness_enthusiasts",
+  "style": {
+    "energy_level": 0.6519480003616859,
+    "emotion": "energetic"
+  },
+  "scenes": [
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "Guys stop scrolling!! I just discovered something that blew my mind \ud83e\udd2f Optimal AI is a game changer!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 3.66155013086596,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes social sharing super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "The accuracy of Optimal AI is UNREAL - it knows exactly what I'm eating!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 4.57693766358245,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "I had to share Optimal AI because it's too good to keep secret!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

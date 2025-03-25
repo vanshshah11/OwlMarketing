@@ -1,0 +1,66 @@
+{
+  "script_generation": {
+    "script_count": 3,
+    "max_duration": 60,
+    "target_audience": [
+      "health-conscious adults",
+      "fitness enthusiasts"
+    ]
+  },
+  "video_generation": {
+    "resolution": [
+      1080,
+      1920
+    ],
+    "fps": 30,
+    "quality": "high"
+  },
+  "scheduling": {
+    "platforms": [
+      "tiktok",
+      "instagram"
+    ],
+    "posting_frequency": "daily",
+    "optimal_times": [
+      "12:00",
+      "18:00"
+    ]
+  },
+  "food_items": [
+    {
+      "name": "avocado toast",
+      "calories": 350,
+      "protein": 12,
+      "carbs": 38,
+      "fat": 18
+    },
+    {
+      "name": "chicken salad",
+      "calories": 250,
+      "protein": 25,
+      "carbs": 10,
+      "fat": 12
+    },
+    {
+      "name": "protein shake",
+      "calories": 180,
+      "protein": 30,
+      "carbs": 15,
+      "fat": 2
+    },
+    {
+      "name": "salmon bowl",
+      "calories": 420,
+      "protein": 28,
+      "carbs": 30,
+      "fat": 22
+    },
+    {
+      "name": "greek yogurt parfait",
+      "calories": 280,
+      "protein": 18,
+      "carbs": 35,
+      "fat": 8
+    }
+  ]
+}

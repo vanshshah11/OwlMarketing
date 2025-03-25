@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Progress Tracking Demo",
+  "target_audience": "weight_management",
+  "key_message": "Accurate nutrition data",
+  "content": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?! showing how Optimal AI helps with progress tracking",
+  "caption": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?! #OptimalAI #CalorieTracking #weight_management",
+  "style": {
+    "energy_level": 0.7283350658548291,
+    "emotion": "energetic"
+  },
+  "scenes": [
+    {
+      "duration": 5.884634138891721,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 7.846178851855628,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes progress tracking super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 10.0,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "The accuracy of {app_name} is UNREAL - it knows exactly what I'm eating!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 5.0,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "Trust me, {app_name} is worth downloading RIGHT NOW!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

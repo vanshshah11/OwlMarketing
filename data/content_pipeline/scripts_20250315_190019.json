@@ -1,0 +1,137 @@
+[
+  {
+    "title": "Optimal AI Meal Planning Demo",
+    "target_audience": "busy_professionals",
+    "key_message": "User-friendly interface",
+    "content": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me showing how Optimal AI helps with meal planning",
+    "caption": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me #OptimalAI #CalorieTracking #busy_professionals",
+    "style": {
+      "energy_level": 0.7610505098927051,
+      "emotion": "excited"
+    },
+    "scenes": [
+      {
+        "duration": 3,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me"
+      },
+      {
+        "duration": 4,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1"
+      },
+      {
+        "duration": 3,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "The accuracy of {app_name} is UNREAL - it knows exactly what I'm eating!"
+      },
+      {
+        "duration": 5,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "I'm literally telling everyone about {app_name} - it's that incredible!"
+      }
+    ]
+  },
+  {
+    "title": "Optimal AI Meal Planning Demo",
+    "target_audience": "fitness_enthusiasts",
+    "key_message": "Accurate nutrition data",
+    "content": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me showing how Optimal AI helps with meal planning",
+    "caption": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me #OptimalAI #CalorieTracking #fitness_enthusiasts",
+    "style": {
+      "energy_level": 0.6620030337245577,
+      "emotion": "energetic"
+    },
+    "scenes": [
+      {
+        "duration": 3,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me"
+      },
+      {
+        "duration": 4,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1"
+      },
+      {
+        "duration": 3,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "The accuracy of {app_name} is UNREAL - it knows exactly what I'm eating!"
+      },
+      {
+        "duration": 5,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "Trust me, {app_name} is worth downloading RIGHT NOW!"
+      }
+    ]
+  },
+  {
+    "title": "Optimal AI Meal Planning Demo",
+    "target_audience": "weight_management",
+    "key_message": "Time-saving features",
+    "content": "The moment I realized Optimal AI could do THIS... I was shook \ud83d\ude31 No one told me this existed! showing how Optimal AI helps with meal planning",
+    "caption": "The moment I realized Optimal AI could do THIS... I was shook \ud83d\ude31 No one told me this existed! #OptimalAI #CalorieTracking #weight_management",
+    "style": {
+      "energy_level": 0.7563937819655804,
+      "emotion": "enthusiastic"
+    },
+    "scenes": [
+      {
+        "duration": 3,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "The moment I realized Optimal AI could do THIS... I was shook \ud83d\ude31 No one told me this existed!"
+      },
+      {
+        "duration": 4,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1"
+      },
+      {
+        "duration": 3,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "My progress went through the ROOF once I started using {app_name}!"
+      },
+      {
+        "duration": 5,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "I had to share {app_name} because it's too good to keep secret!"
+      }
+    ]
+  }
+]

@@ -1,0 +1,60 @@
+{
+  "optimal_ai_specific": {
+    "hooks": [
+      {
+        "frame_reference": "Transform_your_fitness_journey_with_Cal_Ai_\u2013_your_personal_coach,_always_within_reach!_Start_your_pa_0030.jpg",
+        "suggested_hook": "Tired of guessing calories?",
+        "target_persona": "busy_professional"
+      },
+      {
+        "frame_reference": "Transform_your_fitness_journey_with_Cal_Ai_\u2013_your_personal_coach,_always_within_reach!_Start_your_pa_0024.jpg",
+        "suggested_hook": "Meet Optimal AI",
+        "target_persona": "fitness_enthusiast"
+      },
+      {
+        "frame_reference": "Transform_your_fitness_journey_with_Cal_Ai_\u2013_your_personal_coach,_always_within_reach!_Start_your_pa_0018.jpg",
+        "suggested_hook": "Track calories in seconds",
+        "target_persona": "health_conscious"
+      },
+      {
+        "frame_reference": "Transform_your_fitness_journey_with_Cal_Ai_\u2013_your_personal_coach,_always_within_reach!_Start_your_pa_0019.jpg",
+        "suggested_hook": "AI-powered food tracking",
+        "target_persona": "weight_loss_journey"
+      },
+      {
+        "frame_reference": "Transform_your_fitness_journey_with_Cal_Ai_\u2013_your_personal_coach,_always_within_reach!_Start_your_pa_0025.jpg",
+        "suggested_hook": "No more manual logging",
+        "target_persona": "meal_prep_lover"
+      }
+    ],
+    "demonstrations": [
+      {
+        "frame_reference": "Tracking_food_is_too_easy\ud83d\ude2e\u200d\ud83d\udca8#calai_#fyp\u30b7_#cal__0015.jpg",
+        "value_prop": "Instant calorie counting",
+        "focus": "Optimal AI interface simplicity"
+      },
+      {
+        "frame_reference": "Tracking_food_is_too_easy\ud83d\ude2e\u200d\ud83d\udca8#calai_#fyp\u30b7_#cal__0001.jpg",
+        "value_prop": "AI-powered accuracy",
+        "focus": "Optimal AI interface simplicity"
+      },
+      {
+        "frame_reference": "This_app_has_been_incredibly_helpful!_0004.jpg",
+        "value_prop": "Save hours daily",
+        "focus": "Optimal AI interface simplicity"
+      },
+      {
+        "frame_reference": "This_app_has_been_incredibly_helpful!_0010.jpg",
+        "value_prop": "Track anything, anywhere",
+        "focus": "Optimal AI interface simplicity"
+      },
+      {
+        "frame_reference": "Track_you_food_with_@Cal_AI_\u2022_\u2022_\u2022_\u2022_\u2022_\ud83d\ude97\ud83d\udca8_\u201cNo_problem!_Here\u2019s_the_information_about_the_Mercedes_CLR__0009.jpg",
+        "value_prop": "Smart meal suggestions",
+        "focus": "Optimal AI interface simplicity"
+      }
+    ],
+    "testimonials": [],
+    "educational": []
+  }
+}

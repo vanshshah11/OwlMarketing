@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Social Sharing Demo",
+  "target_audience": "health_conscious",
+  "key_message": "Time-saving features",
+  "content": "Hate logging calories? Optimal AI makes it incredibly simple showing how Optimal AI helps with social sharing",
+  "caption": "Hate logging calories? Optimal AI makes it incredibly simple #OptimalAI #CalorieTracking #health_conscious",
+  "style": {
+    "energy_level": 0.79143320308645,
+    "emotion": "excited"
+  },
+  "scenes": [
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "Hate logging calories? Optimal AI makes it incredibly simple",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 3.66155013086596,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes social sharing super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "Get accurate nutrition data in seconds, not minutes",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 4.57693766358245,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "Switch to Optimal AI for instant, accurate nutrition data",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

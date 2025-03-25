@@ -1,0 +1,45 @@
+{
+  "title": "Optimal AI Progress Tracking Demo",
+  "target_audience": "health_conscious",
+  "key_message": "Accurate nutrition data",
+  "content": "Just discovered Optimal AI and I'm literally speechless... HOW is this even possible?! showing how Optimal AI helps with progress tracking",
+  "caption": "Just discovered Optimal AI and I'm literally speechless... HOW is this even possible?! #OptimalAI #CalorieTracking #health_conscious",
+  "style": {
+    "energy_level": 0.6395780706276819,
+    "emotion": "energetic"
+  },
+  "scenes": [
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "Just discovered Optimal AI and I'm literally speechless... HOW is this even possible?!"
+    },
+    {
+      "duration": 4,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes progress tracking super easy! \ud83d\udcf1"
+    },
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "I saved SO much time using {app_name} - it does everything automatically!"
+    },
+    {
+      "duration": 5,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "Trust me, {app_name} is worth downloading RIGHT NOW!"
+    }
+  ]
+}
