@@ -1,0 +1,45 @@
+{
+  "title": "Optimal AI Restaurant Menu Scanning Demo",
+  "target_audience": "health_conscious",
+  "key_message": "User-friendly interface",
+  "content": "When Optimal AI calculated my macros in seconds I almost dropped my phone \ud83d\udcf1 This is wild! showing how Optimal AI helps with restaurant menu scanning",
+  "caption": "When Optimal AI calculated my macros in seconds I almost dropped my phone \ud83d\udcf1 This is wild! #OptimalAI #CalorieTracking #health_conscious",
+  "style": {
+    "energy_level": 0.7039452064596122,
+    "emotion": "energetic"
+  },
+  "scenes": [
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "When Optimal AI calculated my macros in seconds I almost dropped my phone \ud83d\udcf1 This is wild!"
+    },
+    {
+      "duration": 4,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes restaurant menu scanning super easy! \ud83d\udcf1"
+    },
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "No more guessing or manual tracking - {app_name} literally changed my life!"
+    },
+    {
+      "duration": 5,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "I had to share {app_name} because it's too good to keep secret!"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Real Time Calorie Tracking Demo",
+  "target_audience": "health_conscious",
+  "key_message": "Easy calorie tracking",
+  "content": "Wait...HOW did I not know about Optimal AI before?? This is actually insane! showing how Optimal AI helps with real time calorie tracking",
+  "caption": "Wait...HOW did I not know about Optimal AI before?? This is actually insane! #OptimalAI #CalorieTracking #health_conscious",
+  "style": {
+    "energy_level": 0.682163248080817,
+    "emotion": "excited"
+  },
+  "scenes": [
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "Wait...HOW did I not know about Optimal AI before?? This is actually insane!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 3.66155013086596,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes real time calorie tracking super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "My progress went through the ROOF once I started using {app_name}!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 4.57693766358245,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "I had to share {app_name} because it's too good to keep secret!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

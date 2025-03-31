@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Meal Planning Demo",
+  "target_audience": "weight_management",
+  "key_message": "Easy calorie tracking",
+  "content": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me showing how Optimal AI helps with meal planning",
+  "caption": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me #OptimalAI #CalorieTracking #weight_management",
+  "style": {
+    "energy_level": 0.6289856103289734,
+    "emotion": "energetic"
+  },
+  "scenes": [
+    {
+      "duration": 5.884634138891721,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "My nutritionist didn't even know this existed! Optimal AI just changed everything for me",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 7.846178851855628,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 10.0,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "No more guessing or manual tracking - {app_name} literally changed my life!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 5.0,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "Don't wait like I did - grab {app_name} now and see for yourself!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Social Sharing Demo",
+  "target_audience": "busy_professionals",
+  "key_message": "User-friendly interface",
+  "content": "Never struggle with food logging again - Optimal AI does it for you showing how Optimal AI helps with social sharing",
+  "caption": "Never struggle with food logging again - Optimal AI does it for you #OptimalAI #CalorieTracking #busy_professionals",
+  "style": {
+    "energy_level": 0.7806639416636842,
+    "emotion": "enthusiastic"
+  },
+  "scenes": [
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "Never struggle with food logging again - Optimal AI does it for you",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 3.66155013086596,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes social sharing super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "Get accurate nutrition data in seconds, not minutes",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 4.57693766358245,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "Download Optimal AI now to transform your nutrition tracking",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

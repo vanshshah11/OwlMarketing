@@ -1,0 +1,45 @@
+{
+  "title": "Optimal AI Meal Planning Demo",
+  "target_audience": "weight_management",
+  "key_message": "Accurate nutrition data",
+  "content": "When Optimal AI calculated my macros in seconds I almost dropped my phone \ud83d\udcf1 This is wild! showing how Optimal AI helps with meal planning",
+  "caption": "When Optimal AI calculated my macros in seconds I almost dropped my phone \ud83d\udcf1 This is wild! #OptimalAI #CalorieTracking #weight_management",
+  "style": {
+    "energy_level": 0.708825601893326,
+    "emotion": "enthusiastic"
+  },
+  "scenes": [
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "When Optimal AI calculated my macros in seconds I almost dropped my phone \ud83d\udcf1 This is wild!"
+    },
+    {
+      "duration": 4,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1"
+    },
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "I saved SO much time using {app_name} - it does everything automatically!"
+    },
+    {
+      "duration": 5,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "You NEED to try {app_name} right now - I'm still shocked by how good it is!"
+    }
+  ]
+}

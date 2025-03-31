@@ -1,0 +1,45 @@
+{
+  "title": "Optimal AI Real Time Calorie Tracking Demo",
+  "target_audience": "weight_management",
+  "key_message": "Time-saving features",
+  "content": "So I've been struggling with nutrition for YEARS until I stumbled on Optimal AI... my jaw DROPPED showing how Optimal AI helps with real time calorie tracking",
+  "caption": "So I've been struggling with nutrition for YEARS until I stumbled on Optimal AI... my jaw DROPPED #OptimalAI #CalorieTracking #weight_management",
+  "style": {
+    "energy_level": 0.707332818219417,
+    "emotion": "enthusiastic"
+  },
+  "scenes": [
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "So I've been struggling with nutrition for YEARS until I stumbled on Optimal AI... my jaw DROPPED"
+    },
+    {
+      "duration": 4,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes real time calorie tracking super easy! \ud83d\udcf1"
+    },
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "My progress went through the ROOF once I started using {app_name}!"
+    },
+    {
+      "duration": 5,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "You NEED to try {app_name} right now - I'm still shocked by how good it is!"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Optimal AI Progress Tracking Demo",
+    "target_audience": "health_conscious",
+    "key_message": "Accurate nutrition data",
+    "content": "Just discovered Optimal AI and I'm literally speechless... HOW is this even possible?! showing how Optimal AI helps with progress tracking",
+    "caption": "Just discovered Optimal AI and I'm literally speechless... HOW is this even possible?! #OptimalAI #CalorieTracking #health_conscious",
+    "style": {
+      "energy_level": 0.6395780706276819,
+      "emotion": "energetic"
+    },
+    "scenes": [
+      {
+        "duration": 3,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "Just discovered Optimal AI and I'm literally speechless... HOW is this even possible?!"
+      },
+      {
+        "duration": 4,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes progress tracking super easy! \ud83d\udcf1"
+      },
+      {
+        "duration": 3,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "I saved SO much time using {app_name} - it does everything automatically!"
+      },
+      {
+        "duration": 5,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "Trust me, {app_name} is worth downloading RIGHT NOW!"
+      }
+    ]
+  },
+  {
+    "title": "Optimal AI Meal Planning Demo",
+    "target_audience": "busy_professionals",
+    "key_message": "Time-saving features",
+    "content": "I was tracking my meals the hard way for YEARS until I found Optimal AI... my mind is blown! showing how Optimal AI helps with meal planning",
+    "caption": "I was tracking my meals the hard way for YEARS until I found Optimal AI... my mind is blown! #OptimalAI #CalorieTracking #busy_professionals",
+    "style": {
+      "energy_level": 0.6968850940026666,
+      "emotion": "energetic"
+    },
+    "scenes": [
+      {
+        "duration": 3,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "I was tracking my meals the hard way for YEARS until I found Optimal AI... my mind is blown!"
+      },
+      {
+        "duration": 4,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1"
+      },
+      {
+        "duration": 3,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "I've never stuck with anything until {app_name} - it's just so effortless!"
+      },
+      {
+        "duration": 5,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "I'm literally telling everyone about {app_name} - it's that incredible!"
+      }
+    ]
+  }
+]

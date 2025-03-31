@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Social Sharing Demo",
+  "target_audience": "health_conscious",
+  "key_message": "Time-saving features",
+  "content": "My face when I saw what {app_name} can do \ud83d\ude31 This is NOT what I expected! showing how Optimal AI helps with social sharing",
+  "caption": "My face when I saw what {app_name} can do \ud83d\ude31 This is NOT what I expected! #OptimalAI #CalorieTracking #health_conscious",
+  "style": {
+    "energy_level": 0.8925263677259357,
+    "emotion": "excited"
+  },
+  "scenes": [
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "My face when I saw what {app_name} can do \ud83d\ude31 This is NOT what I expected!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 3.66155013086596,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes social sharing super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "I've never stuck with anything until {app_name} - it's just so effortless!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 4.57693766358245,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "You NEED to try {app_name} right now - I'm still shocked by how good it is!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

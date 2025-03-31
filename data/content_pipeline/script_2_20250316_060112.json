@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Progress Tracking Demo",
+  "target_audience": "busy_professionals",
+  "key_message": "Easy calorie tracking",
+  "content": "Someone in my fitness group shared Optimal AI and we're all FREAKING OUT about what it can do! showing how Optimal AI helps with progress tracking",
+  "caption": "Someone in my fitness group shared Optimal AI and we're all FREAKING OUT about what it can do! #OptimalAI #CalorieTracking #busy_professionals",
+  "style": {
+    "energy_level": 0.8754004512697569,
+    "emotion": "energetic"
+  },
+  "scenes": [
+    {
+      "duration": 5.884634138891721,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "Someone in my fitness group shared Optimal AI and we're all FREAKING OUT about what it can do!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 7.846178851855628,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes progress tracking super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 10.0,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "I saved SO much time using {app_name} - it does everything automatically!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 5.0,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "You NEED to try {app_name} right now - I'm still shocked by how good it is!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

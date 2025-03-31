@@ -13,7 +13,31 @@
       1920
     ],
     "fps": 30,
-    "quality": "high"
+    "quality": "high",
+    "wan_settings": {
+      "resolution": "720p",
+      "sample_steps": 30,
+      "guide_scale": 9.0,
+      "fps": 24
+    },
+    "gpu_settings": {
+      "L4": {
+        "resolution": "720p",
+        "sample_steps": 35,
+        "guide_scale": 9.5,
+        "batch_size": 5,
+        "memory_efficient": true,
+        "can_use_1080p": true
+      },
+      "T4": {
+        "resolution": "480p",
+        "sample_steps": 25,
+        "guide_scale": 6.0,
+        "batch_size": 3,
+        "memory_efficient": true,
+        "can_use_1080p": false
+      }
+    }
   },
   "scheduling": {
     "platforms": [

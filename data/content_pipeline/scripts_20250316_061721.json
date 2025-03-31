@@ -1,0 +1,188 @@
+[
+  {
+    "title": "Optimal AI Meal Planning Demo",
+    "target_audience": "busy_professionals",
+    "key_message": "Time-saving features",
+    "content": "Frustrated with other calorie apps? Optimal AI solves the problem showing how Optimal AI helps with meal planning",
+    "caption": "Frustrated with other calorie apps? Optimal AI solves the problem #OptimalAI #CalorieTracking #busy_professionals",
+    "style": {
+      "energy_level": 0.8483163617028927,
+      "emotion": "enthusiastic"
+    },
+    "scenes": [
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "Frustrated with other calorie apps? Optimal AI solves the problem",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 3.66155013086596,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "The complete nutrition picture delivered at a glance",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 4.57693766358245,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "Join thousands who've simplified their tracking with Optimal AI",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  },
+  {
+    "title": "Optimal AI Restaurant Menu Scanning Demo",
+    "target_audience": "fitness_enthusiasts",
+    "key_message": "Easy calorie tracking",
+    "content": "Calorie tracking made simple with just one tap \u2728 showing how Optimal AI helps with restaurant menu scanning",
+    "caption": "Calorie tracking made simple with just one tap \u2728 #OptimalAI #CalorieTracking #fitness_enthusiasts",
+    "style": {
+      "energy_level": 0.7691823210258372,
+      "emotion": "excited"
+    },
+    "scenes": [
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "Calorie tracking made simple with just one tap \u2728",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 3.66155013086596,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes restaurant menu scanning super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "Track any meal perfectly, every time, with one simple scan",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 4.57693766358245,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "Download Optimal AI now to transform your nutrition tracking",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  },
+  {
+    "title": "Optimal AI Social Sharing Demo",
+    "target_audience": "health_conscious",
+    "key_message": "Time-saving features",
+    "content": "Hate logging calories? Optimal AI makes it incredibly simple showing how Optimal AI helps with social sharing",
+    "caption": "Hate logging calories? Optimal AI makes it incredibly simple #OptimalAI #CalorieTracking #health_conscious",
+    "style": {
+      "energy_level": 0.79143320308645,
+      "emotion": "excited"
+    },
+    "scenes": [
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "Hate logging calories? Optimal AI makes it incredibly simple",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 3.66155013086596,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes social sharing super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "Get accurate nutrition data in seconds, not minutes",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 4.57693766358245,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "Switch to Optimal AI for instant, accurate nutrition data",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  }
+]

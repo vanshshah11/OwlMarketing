@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Progress Tracking Demo",
+  "target_audience": "health_conscious",
+  "key_message": "Easy calorie tracking",
+  "content": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?! showing how Optimal AI helps with progress tracking",
+  "caption": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?! #OptimalAI #CalorieTracking #health_conscious",
+  "style": {
+    "energy_level": 0.7710698110002456,
+    "emotion": "energetic"
+  },
+  "scenes": [
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "I was about to give up on my goals until I accidentally found Optimal AI... WHAT?!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 3.66155013086596,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes progress tracking super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "My progress went through the ROOF once I started using {app_name}!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 4.57693766358245,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "Don't wait like I did - grab {app_name} now and see for yourself!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}

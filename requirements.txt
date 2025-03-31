@@ -1,10 +1,12 @@
 # Core dependencies
 torch>=2.0.0
 torchvision>=0.15.0
-diffusers>=0.24.0
+diffusers>=0.26.3  # Updated for Wan 2.1 support
 transformers>=4.36.0
 accelerate>=0.25.0
-safetensors>=0.4.0
+safetensors>=0.4.1
+xformers>=0.0.22   # For L4 memory-efficient attention
+triton>=2.1.0      # For L4 optimizations
 
 # Video processing
 opencv-python>=4.8.0
@@ -25,8 +27,7 @@ tqdm>=4.66.0
 requests>=2.31.0
 python-dotenv>=1.0.0
 pathlib>=1.0.1
-logging>=0.5.1.2
-playwright>=1.40.0
+huggingface_hub>=0.17.3  # For accessing Wan 2.1 models
 
 # Analysis
 scipy>=1.11.0
@@ -39,5 +40,41 @@ moviepy>=1.0.3
 tensorflow>=2.12.0
 tensorflow-hub>=0.14.0
 
-# Added from the code block
-gradio>=4.0.0 
+# UI components
+gradio>=4.0.0
+einops>=0.7.0       # For tensor manipulations
+
+# Data processing
+numpy>=1.24.0
+pandas>=1.5.3
+pillow>=9.5.0
+opencv-python>=4.7.0
+pydub>=0.25.1
+scikit-image>=0.19.3
+matplotlib>=3.7.1
+
+# AI/ML libraries
+tensorflow>=2.12.0
+torch>=2.0.0
+torchvision>=0.15.0
+mediapipe>=0.10.1
+
+# UI generation
+PyQt5>=5.15.9
+svglib>=1.3.0
+reportlab>=3.6.0
+fonttools>=4.33.0
+
+# Image and face processing
+face-alignment>=1.3.5
+dlib>=19.22.0
+insightface>=0.7.2
+
+# Web automation
+playwright>=1.32.1
+
+# Scheduling
+schedule>=1.2.0
+
+# Logging
+loguru>=0.7.0

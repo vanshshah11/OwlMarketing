@@ -1,0 +1,45 @@
+{
+  "title": "Optimal AI Meal Planning Demo",
+  "target_audience": "busy_professionals",
+  "key_message": "Time-saving features",
+  "content": "The way Optimal AI just scanned my meal and knew EVERYTHING in it... I'm still in shock! showing how Optimal AI helps with meal planning",
+  "caption": "The way Optimal AI just scanned my meal and knew EVERYTHING in it... I'm still in shock! #OptimalAI #CalorieTracking #busy_professionals",
+  "style": {
+    "energy_level": 0.7214987986666275,
+    "emotion": "enthusiastic"
+  },
+  "scenes": [
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "The way Optimal AI just scanned my meal and knew EVERYTHING in it... I'm still in shock!"
+    },
+    {
+      "duration": 4,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1"
+    },
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "I've never stuck with anything until {app_name} - it's just so effortless!"
+    },
+    {
+      "duration": 5,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "I'm literally telling everyone about {app_name} - it's that incredible!"
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+[
+  {
+    "title": "Optimal AI Real Time Calorie Tracking Demo",
+    "target_audience": "health_conscious",
+    "key_message": "Easy calorie tracking",
+    "content": "Wait...HOW did I not know about Optimal AI before?? This is actually insane! showing how Optimal AI helps with real time calorie tracking",
+    "caption": "Wait...HOW did I not know about Optimal AI before?? This is actually insane! #OptimalAI #CalorieTracking #health_conscious",
+    "style": {
+      "energy_level": 0.682163248080817,
+      "emotion": "excited"
+    },
+    "scenes": [
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "Wait...HOW did I not know about Optimal AI before?? This is actually insane!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 3.66155013086596,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes real time calorie tracking super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "My progress went through the ROOF once I started using {app_name}!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 4.57693766358245,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "I had to share {app_name} because it's too good to keep secret!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  },
+  {
+    "title": "Optimal AI Meal Planning Demo",
+    "target_audience": "busy_professionals",
+    "key_message": "Easy calorie tracking",
+    "content": "So I've been struggling with nutrition for YEARS until I stumbled on Optimal AI... my jaw DROPPED showing how Optimal AI helps with meal planning",
+    "caption": "So I've been struggling with nutrition for YEARS until I stumbled on Optimal AI... my jaw DROPPED #OptimalAI #CalorieTracking #busy_professionals",
+    "style": {
+      "energy_level": 0.7704397643603305,
+      "emotion": "enthusiastic"
+    },
+    "scenes": [
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "So I've been struggling with nutrition for YEARS until I stumbled on Optimal AI... my jaw DROPPED",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 3.66155013086596,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes meal planning super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "I saved SO much time using {app_name} - it does everything automatically!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 4.57693766358245,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "Don't wait like I did - grab {app_name} now and see for yourself!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  },
+  {
+    "title": "Optimal AI Real Time Calorie Tracking Demo",
+    "target_audience": "weight_management",
+    "key_message": "User-friendly interface",
+    "content": "After trying literally every app out there... THIS happened when I found Optimal AI \ud83e\udd2f showing how Optimal AI helps with real time calorie tracking",
+    "caption": "After trying literally every app out there... THIS happened when I found Optimal AI \ud83e\udd2f #OptimalAI #CalorieTracking #weight_management",
+    "style": {
+      "energy_level": 0.8359956780628138,
+      "emotion": "enthusiastic"
+    },
+    "scenes": [
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.8,
+          "emotion": "excited"
+        },
+        "text": "After trying literally every app out there... THIS happened when I found Optimal AI \ud83e\udd2f",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 3.66155013086596,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "energetic"
+        },
+        "text": "Optimal AI makes real time calorie tracking super easy! \ud83d\udcf1",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 2.74616259814947,
+        "style": {
+          "energy_level": 0.7,
+          "emotion": "enthusiastic"
+        },
+        "text": "The accuracy of {app_name} is UNREAL - it knows exactly what I'm eating!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      },
+      {
+        "duration": 4.57693766358245,
+        "style": {
+          "energy_level": 0.6,
+          "emotion": "calm"
+        },
+        "text": "You NEED to try {app_name} right now - I'm still shocked by how good it is!",
+        "text_position": [
+          0.5,
+          0.8
+        ]
+      }
+    ],
+    "transition_type": "dissolve"
+  }
+]

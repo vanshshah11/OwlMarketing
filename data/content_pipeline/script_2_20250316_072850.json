@@ -1,0 +1,61 @@
+{
+  "title": "Optimal AI Real Time Calorie Tracking Demo",
+  "target_audience": "health_conscious",
+  "key_message": "Accurate nutrition data",
+  "content": "I thought I'd seen everything until my friend showed me Optimal AI... I'm still in shock! showing how Optimal AI helps with real time calorie tracking",
+  "caption": "I thought I'd seen everything until my friend showed me Optimal AI... I'm still in shock! #OptimalAI #CalorieTracking #health_conscious",
+  "style": {
+    "energy_level": 0.6648607573439903,
+    "emotion": "excited"
+  },
+  "scenes": [
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "I thought I'd seen everything until my friend showed me Optimal AI... I'm still in shock!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 4,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes real time calorie tracking super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 3,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "No more guessing or manual tracking - Optimal AI literally changed my life!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 5,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "I'm literally telling everyone about Optimal AI - it's that incredible!",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ]
+}

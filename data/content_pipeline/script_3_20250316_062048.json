@@ -1,0 +1,62 @@
+{
+  "title": "Optimal AI Real Time Calorie Tracking Demo",
+  "target_audience": "health_conscious",
+  "key_message": "Accurate nutrition data",
+  "content": "Too busy to track your food? Optimal AI has the answer showing how Optimal AI helps with real time calorie tracking",
+  "caption": "Too busy to track your food? Optimal AI has the answer #OptimalAI #CalorieTracking #health_conscious",
+  "style": {
+    "energy_level": 0.855584004794512,
+    "emotion": "enthusiastic"
+  },
+  "scenes": [
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.8,
+        "emotion": "excited"
+      },
+      "text": "Too busy to track your food? Optimal AI has the answer",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 3.66155013086596,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "energetic"
+      },
+      "text": "Optimal AI makes real time calorie tracking super easy! \ud83d\udcf1",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 2.74616259814947,
+      "style": {
+        "energy_level": 0.7,
+        "emotion": "enthusiastic"
+      },
+      "text": "The complete nutrition picture delivered at a glance",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    },
+    {
+      "duration": 4.57693766358245,
+      "style": {
+        "energy_level": 0.6,
+        "emotion": "calm"
+      },
+      "text": "Switch to Optimal AI for instant, accurate nutrition data",
+      "text_position": [
+        0.5,
+        0.8
+      ]
+    }
+  ],
+  "transition_type": "dissolve"
+}
