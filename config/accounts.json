@@ -1,0 +1,223 @@
+[
+    {
+    "avatar": "sarah",
+    "platforms": {
+      "tiktok": {
+        "username": "@sarah_fitness_tips",
+        "password": "secure_password_here",
+        "posting_times": ["09:00", "18:00"]
+      },
+      "instagram": {
+        "username": "@sarah.fitness.tips",
+        "password": "secure_password_here",
+        "posting_times": ["10:00", "19:00"]
+      },
+      "youtube": {
+        "username": "@SarahFitnessTips",
+        "password": "secure_password_here",
+        "posting_times": ["11:00", "20:00"]
+      }
+    }
+  },
+  {
+    "avatar": "emily",
+    "platforms": {
+      "tiktok": {
+        "username": "@emily_health_life",
+        "password": "secure_password_here",
+        "posting_times": ["08:30", "17:30"]
+      },
+      "instagram": {
+        "username": "@emily.health.life",
+        "password": "secure_password_here",
+        "posting_times": ["09:30", "18:30"]
+      },
+      "youtube": {
+        "username": "@EmilyHealthLife",
+        "password": "secure_password_here",
+        "posting_times": ["10:30", "19:30"]
+      }
+    }
+  },
+  {
+    "avatar": "sophia",
+    "platforms": {
+      "tiktok": {
+        "username": "@sophia_fitness",
+        "password": "secure_password_here",
+        "posting_times": ["08:00", "17:00"]
+      },
+      "instagram": {
+        "username": "@sophia.fitness",
+        "password": "secure_password_here",
+        "posting_times": ["09:00", "18:00"]
+      },
+      "youtube": {
+        "username": "@SophiaFitness",
+        "password": "secure_password_here",
+        "posting_times": ["10:00", "19:00"]
+      }
+    }
+  },
+  {
+    "avatar": "olivia",
+    "platforms": {
+      "tiktok": {
+        "username": "@olivia_healthy_living",
+        "password": "secure_password_here",
+        "posting_times": ["07:30", "16:30"]
+      },
+      "instagram": {
+        "username": "@olivia.healthy.living",
+        "password": "secure_password_here",
+        "posting_times": ["08:30", "17:30"]
+      },
+      "youtube": {
+        "username": "@OliviaHealthyLiving",
+        "password": "secure_password_here",
+        "posting_times": ["09:30", "18:30"]
+      }
+    }
+  },
+  {
+    "avatar": "emma",
+    "platforms": {
+      "tiktok": {
+        "username": "@emma_health_tips",
+        "password": "secure_password_here",
+        "posting_times": ["07:00", "16:00"]
+      },
+      "instagram": {
+        "username": "@emma.health.tips",
+        "password": "secure_password_here",
+        "posting_times": ["08:00", "17:00"]
+      },
+      "youtube": {
+        "username": "@EmmaHealthTips",
+        "password": "secure_password_here",
+        "posting_times": ["09:00", "18:00"]
+      }
+    }
+  },
+  {
+    "avatar": "ava",
+    "platforms": {
+      "tiktok": {
+        "username": "@ava_fit_tips",
+        "password": "secure_password_here",
+        "posting_times": ["10:00", "19:00"]
+      },
+      "instagram": {
+        "username": "@ava.fit.tips",
+        "password": "secure_password_here",
+        "posting_times": ["11:00", "20:00"]
+      },
+      "youtube": {
+        "username": "@AvaFitTips",
+        "password": "secure_password_here",
+        "posting_times": ["12:00", "21:00"]
+      }
+    }
+  },
+  {
+    "avatar": "isabella",
+    "platforms": {
+      "tiktok": {
+        "username": "@isabella_wellness",
+        "password": "secure_password_here",
+        "posting_times": ["11:00", "20:00"]
+      },
+      "instagram": {
+        "username": "@isabella.wellness",
+        "password": "secure_password_here",
+        "posting_times": ["12:00", "21:00"]
+      },
+      "youtube": {
+        "username": "@IsabellaWellness",
+        "password": "secure_password_here",
+        "posting_times": ["13:00", "22:00"]
+      }
+    }
+  },
+  {
+    "avatar": "mia",
+    "platforms": {
+      "tiktok": {
+        "username": "@mia_fitness_journey",
+        "password": "secure_password_here",
+        "posting_times": ["09:30", "18:30"]
+      },
+      "instagram": {
+        "username": "@mia.fitness.journey",
+        "password": "secure_password_here",
+        "posting_times": ["10:30", "19:30"]
+      },
+      "youtube": {
+        "username": "@MiaFitnessJourney",
+        "password": "secure_password_here",
+        "posting_times": ["11:30", "20:30"]
+      }
+    }
+  },
+  {
+    "avatar": "charlotte",
+    "platforms": {
+      "tiktok": {
+        "username": "@charlotte_health",
+        "password": "secure_password_here",
+        "posting_times": ["10:30", "19:30"]
+      },
+      "instagram": {
+        "username": "@charlotte.health",
+        "password": "secure_password_here",
+        "posting_times": ["11:30", "20:30"]
+      },
+      "youtube": {
+        "username": "@CharlotteHealth",
+        "password": "secure_password_here",
+        "posting_times": ["12:30", "21:30"]
+      }
+    }
+  },
+  {
+    "avatar": "amelia",
+    "platforms": {
+      "tiktok": {
+        "username": "@amelia_wellness_tips",
+        "password": "secure_password_here",
+        "posting_times": ["12:00", "21:00"]
+      },
+      "instagram": {
+        "username": "@amelia.wellness.tips",
+        "password": "secure_password_here",
+        "posting_times": ["13:00", "22:00"]
+      },
+      "youtube": {
+        "username": "@AmeliaWellnessTips",
+        "password": "secure_password_here",
+        "posting_times": ["14:00", "23:00"]
+      }
+    }
+  },
+  {
+    "avatar": "harper",
+    "platforms": {
+      "tiktok": {
+        "username": "@harper_fit_life",
+        "password": "secure_password_here",
+        "posting_times": ["11:30", "20:30"]
+      },
+      "instagram": {
+        "username": "@harper.fit.life",
+        "password": "secure_password_here",
+        "posting_times": ["12:30", "21:30"]
+      },
+      "youtube": {
+        "username": "@HarperFitLife",
+        "password": "secure_password_here",
+        "posting_times": ["13:30", "22:30"]
+      }
+    }
+  }
+  ]
+  

@@ -1,0 +1,25 @@
+{
+    "name": "Ava",
+    "scenario": "Winking - playful and flirty",
+    "features": {
+        "appearance": "hispanic, curvy, hazel eyes, brunette",
+        "scenario_detail": "Winking - playful and flirty",
+        "unique_trait": "Ava has a distinctive look: hispanic, curvy, hazel eyes, brunette"
+    },
+    "emotion_range": [
+        "surprised",
+        "shocked",
+        "amazed",
+        "astonished",
+        "excited",
+        "mind-blown",
+        "awestruck",
+        "thrilled",
+        "stunned",
+        "speechless",
+        "happy",
+        "confident",
+        "curious"
+    ],
+    "current_emotion": "surprised"
+}

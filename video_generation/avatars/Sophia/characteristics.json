@@ -1,0 +1,25 @@
+{
+    "name": "Sophia",
+    "scenario": "Hand on mouth - shocked expression",
+    "features": {
+        "appearance": "black, athletic, dark eyes, curly hair",
+        "scenario_detail": "Hand on mouth - shocked expression",
+        "unique_trait": "Sophia has a distinctive look: black, athletic, dark eyes, curly hair"
+    },
+    "emotion_range": [
+        "surprised",
+        "shocked",
+        "amazed",
+        "astonished",
+        "excited",
+        "mind-blown",
+        "awestruck",
+        "thrilled",
+        "stunned",
+        "speechless",
+        "happy",
+        "confident",
+        "curious"
+    ],
+    "current_emotion": "surprised"
+}

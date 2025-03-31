@@ -1,0 +1,12 @@
+{
+    "api_keys": {
+      "openai": "YOUR_OPENAI_API_KEY",
+      "music_service": "YOUR_MUSIC_API_KEY"
+    },
+    "video_settings": {
+      "format": "vertical",
+      "resolution": "1080x1920"
+    },
+    "posting_schedule": "2025-03-15T12:00:00"
+  }
+  

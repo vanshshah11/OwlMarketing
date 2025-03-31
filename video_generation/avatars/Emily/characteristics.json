@@ -1,0 +1,25 @@
+{
+    "name": "Emily",
+    "scenario": "In car - driving a convertible",
+    "features": {
+        "appearance": "white, thin, brown eyes, blonde hair",
+        "scenario_detail": "In car - driving a convertible",
+        "unique_trait": "Emily has a distinctive look: white, thin, brown eyes, blonde hair"
+    },
+    "emotion_range": [
+        "surprised",
+        "shocked",
+        "amazed",
+        "astonished",
+        "excited",
+        "mind-blown",
+        "awestruck",
+        "thrilled",
+        "stunned",
+        "speechless",
+        "happy",
+        "confident",
+        "curious"
+    ],
+    "current_emotion": "surprised"
+}

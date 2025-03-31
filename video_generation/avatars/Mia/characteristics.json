@@ -1,0 +1,25 @@
+{
+    "name": "Mia",
+    "scenario": "Surprised - with raised eyebrows",
+    "features": {
+        "appearance": "african american, athletic, brown eyes, short hair",
+        "scenario_detail": "Surprised - with raised eyebrows",
+        "unique_trait": "Mia has a distinctive look: african american, athletic, brown eyes, short hair"
+    },
+    "emotion_range": [
+        "surprised",
+        "shocked",
+        "amazed",
+        "astonished",
+        "excited",
+        "mind-blown",
+        "awestruck",
+        "thrilled",
+        "stunned",
+        "speechless",
+        "happy",
+        "confident",
+        "curious"
+    ],
+    "current_emotion": "surprised"
+}

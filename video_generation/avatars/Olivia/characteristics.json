@@ -1,0 +1,25 @@
+{
+    "name": "Olivia",
+    "scenario": "Smiling - happy and cheerful",
+    "features": {
+        "appearance": "white, slender, blue eyes, red hair",
+        "scenario_detail": "Smiling - happy and cheerful",
+        "unique_trait": "Olivia has a distinctive look: white, slender, blue eyes, red hair"
+    },
+    "emotion_range": [
+        "surprised",
+        "shocked",
+        "amazed",
+        "astonished",
+        "excited",
+        "mind-blown",
+        "awestruck",
+        "thrilled",
+        "stunned",
+        "speechless",
+        "happy",
+        "confident",
+        "curious"
+    ],
+    "current_emotion": "surprised"
+}

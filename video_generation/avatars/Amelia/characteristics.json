@@ -1,0 +1,25 @@
+{
+    "name": "Amelia",
+    "scenario": "In conversation - gesturing with hands",
+    "features": {
+        "appearance": "mixed, average build, green eyes, dark hair",
+        "scenario_detail": "In conversation - gesturing with hands",
+        "unique_trait": "Amelia has a distinctive look: mixed, average build, green eyes, dark hair"
+    },
+    "emotion_range": [
+        "surprised",
+        "shocked",
+        "amazed",
+        "astonished",
+        "excited",
+        "mind-blown",
+        "awestruck",
+        "thrilled",
+        "stunned",
+        "speechless",
+        "happy",
+        "confident",
+        "curious"
+    ],
+    "current_emotion": "surprised"
+}
