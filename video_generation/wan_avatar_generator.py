@@ -9,6 +9,7 @@ It provides functionality to create consistent, high-quality avatar videos optim
 import os
 import sys
 import logging
+import traceback
 import torch
 import tempfile
 import time

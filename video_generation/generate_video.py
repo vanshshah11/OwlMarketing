@@ -840,6 +840,256 @@ class VideoGenerator:
             # Return original prompt as fallback
             return base_prompt
 
+    def extract_segment(self, input_video_path: str, output_path: str, start_time: float = 0, duration: float = 5.0) -> str:
+        """
+        Extract a segment from a video.
+        
+        Args:
+            input_video_path (str): Path to input video
+            output_path (str): Path for output segment
+            start_time (float): Start time in seconds
+            duration (float): Duration of segment in seconds
+            
+        Returns:
+            str: Path to extracted segment
+        """
+        try:
+            self.logger.info(f"Extracting {duration}s segment from {input_video_path} starting at {start_time}s")
+            
+            # Create output directory if it doesn't exist
+            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            
+            # Use ffmpeg to extract segment
+            cmd = [
+                'ffmpeg', '-y',
+                '-i', input_video_path,
+                '-ss', str(start_time),
+                '-t', str(duration),
+                '-c:v', 'libx264',
+                '-preset', self.quality_settings['preset'],
+                '-crf', str(self.quality_settings['crf']),
+                '-c:a', 'aac',
+                output_path
+            ]
+            
+            subprocess.run(cmd, check=True)
+            
+            # Verify the output file exists
+            if os.path.exists(output_path):
+                self.logger.info(f"Successfully extracted segment to {output_path}")
+                return output_path
+            else:
+                self.logger.error(f"Failed to extract segment, output file not found: {output_path}")
+                return None
+                
+        except Exception as e:
+            self.logger.error(f"Error extracting segment: {e}")
+            import traceback
+            self.logger.error(traceback.format_exc())
+            return None
+    
+    def combine_segments(self, segment_paths: List[str], output_path: str, transition: str = "fade") -> str:
+        """
+        Combine multiple video segments with transitions.
+        
+        Args:
+            segment_paths (List[str]): List of paths to video segments
+            output_path (str): Path for combined output video
+            transition (str): Transition type (fade, cut)
+            
+        Returns:
+            str: Path to combined video
+        """
+        try:
+            self.logger.info(f"Combining {len(segment_paths)} segments with '{transition}' transitions")
+            
+            # Create output directory if it doesn't exist
+            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            
+            # Prepare a temporary directory for intermediate files
+            with tempfile.TemporaryDirectory() as temp_dir:
+                # For fade transition, create a complex filter
+                if transition == "fade":
+                    # Create inputs string and filter complex
+                    inputs = []
+                    filter_complex = []
+                    overlay_at = []
+                    
+                    # Add each segment
+                    for i, segment in enumerate(segment_paths):
+                        inputs.extend(['-i', segment])
+                        
+                    # Build the filter complex for crossfade transitions
+                    if len(segment_paths) == 1:
+                        # Only one segment, just copy it
+                        cmd = [
+                            'ffmpeg', '-y',
+                            '-i', segment_paths[0],
+                            '-c', 'copy',
+                            output_path
+                        ]
+                    else:
+                        # Multiple segments with crossfade
+                        # Use a simpler approach with concat demuxer for consistent results
+                        # Create a list file for concat
+                        list_file = os.path.join(temp_dir, 'concat_list.txt')
+                        with open(list_file, 'w') as f:
+                            for segment in segment_paths:
+                                f.write(f"file '{os.path.abspath(segment)}'\n")
+                        
+                        # Crossfade duration in seconds
+                        xfade_duration = 0.3  # Brief fade for quick transitions
+                        
+                        # Use xfade filter (requires ffmpeg 4.0+)
+                        cmd = [
+                            'ffmpeg', '-y',
+                            '-f', 'concat',
+                            '-safe', '0',
+                            '-i', list_file,
+                            '-filter_complex', 
+                            f'xfade=transition=fade:duration={xfade_duration}:offset=0',
+                            '-c:v', 'libx264',
+                            '-preset', self.quality_settings['preset'],
+                            '-crf', str(self.quality_settings['crf']),
+                            '-c:a', 'aac',
+                            output_path
+                        ]
+                else:
+                    # Simple cut transition - just concat the files
+                    list_file = os.path.join(temp_dir, 'concat_list.txt')
+                    with open(list_file, 'w') as f:
+                        for segment in segment_paths:
+                            f.write(f"file '{os.path.abspath(segment)}'\n")
+                    
+                    cmd = [
+                        'ffmpeg', '-y',
+                        '-f', 'concat',
+                        '-safe', '0',
+                        '-i', list_file,
+                        '-c:v', 'libx264',
+                        '-preset', self.quality_settings['preset'],
+                        '-crf', str(self.quality_settings['crf']),
+                        '-c:a', 'aac',
+                        output_path
+                    ]
+                
+                # Execute the command
+                self.logger.info(f"Running FFmpeg command: {' '.join(cmd)}")
+                subprocess.run(cmd, check=True)
+            
+            # Verify the output file exists
+            if os.path.exists(output_path):
+                self.logger.info(f"Successfully combined segments to {output_path}")
+                return output_path
+            else:
+                self.logger.error(f"Failed to combine segments, output file not found: {output_path}")
+                return None
+                
+        except Exception as e:
+            self.logger.error(f"Error combining segments: {e}")
+            import traceback
+            self.logger.error(traceback.format_exc())
+            return None
+    
+    def add_text_overlay(self, input_video_path: str, output_path: str, text: str, 
+                         position: str = "bottom", start_time: float = 0, 
+                         duration: float = 3.0, font_size: int = 36) -> str:
+        """
+        Add text overlay to a video.
+        
+        Args:
+            input_video_path (str): Path to input video
+            output_path (str): Path for output video
+            text (str): Text to overlay
+            position (str): Position of text (top, bottom, center)
+            start_time (float): Start time for text overlay in seconds
+            duration (float): Duration for text overlay in seconds
+            font_size (int): Font size for text
+            
+        Returns:
+            str: Path to video with text overlay
+        """
+        try:
+            self.logger.info(f"Adding text overlay to {input_video_path}")
+            
+            # Create output directory if it doesn't exist
+            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            
+            # Get video dimensions using ffprobe
+            cmd_probe = [
+                'ffprobe', 
+                '-v', 'error', 
+                '-select_streams', 'v:0', 
+                '-show_entries', 'stream=width,height,duration', 
+                '-of', 'json', 
+                input_video_path
+            ]
+            
+            probe_output = subprocess.check_output(cmd_probe).decode('utf-8')
+            probe_data = json.loads(probe_output)
+            
+            width = int(probe_data['streams'][0]['width'])
+            height = int(probe_data['streams'][0]['height'])
+            video_duration = float(probe_data['streams'][0]['duration'])
+            
+            # Validate start_time and duration
+            if start_time >= video_duration:
+                self.logger.warning(f"Start time {start_time}s exceeds video duration {video_duration}s")
+                return input_video_path
+                
+            if start_time + duration > video_duration:
+                duration = video_duration - start_time
+                self.logger.warning(f"Adjusted text duration to {duration}s to fit within video")
+            
+            # Determine position coordinates
+            # For bottom position, add some margin from the bottom
+            y_position = "main_h-text_h-36" if position == "bottom" else "main_h/2" if position == "center" else "36"
+            
+            # Wrap text if it's too long
+            wrapped_text = text
+            # Calculate fadeout time (start fading 0.5s before end)
+            fade_out_start = start_time + duration - 0.5 if duration > 1.0 else start_time + duration - 0.2
+            
+            # Create filter for text overlay with fade in/out
+            filter_complex = (
+                f"drawtext=fontfile=/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf:"
+                f"text='{wrapped_text}':"
+                f"fontcolor=white:"
+                f"fontsize={font_size}:"
+                f"box=1:boxcolor=black@0.5:boxborderw=10:"
+                f"x=(main_w-text_w)/2:y={y_position}:"
+                f"enable='between(t,{start_time},{start_time+duration})':"
+                f"alpha='if(lt(t,{start_time+0.5}),t-{start_time},(lt(t,{fade_out_start}),1,{start_time+duration}-t))'"
+            )
+            
+            # Use ffmpeg to add text overlay
+            cmd = [
+                'ffmpeg', '-y',
+                '-i', input_video_path,
+                '-vf', filter_complex,
+                '-c:v', 'libx264',
+                '-preset', self.quality_settings['preset'],
+                '-crf', str(self.quality_settings['crf']),
+                '-c:a', 'copy',
+                output_path
+            ]
+            
+            subprocess.run(cmd, check=True)
+            
+            # Verify the output file exists
+            if os.path.exists(output_path):
+                self.logger.info(f"Successfully added text overlay to {output_path}")
+                return output_path
+            else:
+                self.logger.error(f"Failed to add text overlay, output file not found: {output_path}")
+                return input_video_path
+                
+        except Exception as e:
+            self.logger.error(f"Error adding text overlay: {e}")
+            import traceback
+            self.logger.error(traceback.format_exc())
+            return input_video_path
+
 def generate_video_from_script(script: Dict, output_path: str = "raw_video.mp4") -> str:
     """
     Generate video based on script.

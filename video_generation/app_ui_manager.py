@@ -16,6 +16,8 @@ from typing import Dict, List, Tuple, Optional, Union
 import shutil
 import subprocess
 import tempfile
+from PIL import Image, ImageDraw, ImageFont
+import numpy as np
 
 # Local imports
 from .ui_generator import get_ui_generator, FoodItem
@@ -50,6 +52,46 @@ class AppUIManager:
         self._pattern_learner = pattern_learner  # Lazy loaded
         self._config = self._load_ui_config()
         self.assets_validated = False
+        
+        # Add paths for app UI assets
+        self.screenshots_dir = os.path.join(self._base_dir, 'assets', 'app_ui', 'screenshots')
+        self.recordings_dir = os.path.join(self._base_dir, 'assets', 'app_ui', 'recordings')
+        self.brand_dir = os.path.join(self._base_dir, 'assets', 'app_ui', 'brand')
+        
+        # Define app theme colors from theme.js
+        self.theme = {
+            'colors': {
+                'background': {
+                    'primary': {
+                        'light': '#EBE9E8',
+                        'dark': '#1C1C1E'
+                    }
+                },
+                'text': {
+                    'primary': {
+                        'light': '#000000',
+                        'dark': '#FFFFFF'
+                    }
+                },
+                'macro': {
+                    'protein': '#FF3B30',  # RED
+                    'carbs': '#FF9500',    # ORANGE
+                    'fat': '#5AC8FA'       # BLUE
+                }
+            },
+            'borderRadius': {
+                'medium': 12,
+                'small': 8
+            },
+            'spacing': {
+                's': 8,
+                'm': 16,
+                'l': 24
+            }
+        }
+        
+        # Load logo for branding
+        self.logo_path = os.path.join(self.brand_dir, 'OptimalAI_logo.png')
         
     @property
     def ui_generator(self):
@@ -474,118 +516,485 @@ class AppUIManager:
         self.assets_validated = valid
         return valid
 
-    def create_feature_demo(self, feature, output_path, duration=5.0, food_item=None, script=None):
+    def create_feature_demo(self, feature: str, output_path: str, food_item: Dict = None, duration: float = 6.0) -> str:
         """
-        Create a video demo of a specific app feature.
+        Create an accurate feature demo video focusing on real-time tracking.
         
         Args:
-            feature (str): Feature to demonstrate (e.g., "food scanning", "meal tracking")
-            output_path (str): Path to save the video
-            duration (float): Duration of the video in seconds
-            food_item (dict): Food item to use in the demo
-            script (dict): Script details for context
+            feature: Feature to demonstrate (always defaults to real-time tracking)
+            output_path: Path to save the demo video
+            food_item: Food item to scan
+            duration: Total duration of the demo (5-7 seconds)
             
         Returns:
-            str: Path to the generated video or None if failed
+            Path to the created demo video
         """
-        self.logger.info(f"Creating feature demo for {feature} at {output_path}")
+        # Always use real-time tracking feature
+        feature = "realtime_tracking"
+        
+        # Set default food item if not provided
+        if not food_item:
+            food_item = {
+                "name": "Avocado Toast",
+                "calories": 350,
+                "protein": 12,
+                "carbs": 38,
+                "fat": 18
+            }
+        
+        # Calculate exact timings for a concise demo
+        camera_duration = 2.0  # 2 seconds on camera screen
+        loading_duration = 0.5  # 0.5 seconds loading
+        results_duration = duration - camera_duration - loading_duration  # Remaining time for results
+        
+        # Find relevant UI assets (prioritize existing recordings)
+        recording_path = None
+        for recording in os.listdir(self.recordings_dir):
+            if feature in recording.lower() and food_item["name"].lower().replace(" ", "_") in recording.lower():
+                recording_path = os.path.join(self.recordings_dir, recording)
+                break
+        
+        # If no exact match, use any real-time tracking recording
+        if not recording_path:
+            for recording in os.listdir(self.recordings_dir):
+                if feature in recording.lower():
+                    recording_path = os.path.join(self.recordings_dir, recording)
+                    break
+        
+        if recording_path and os.path.exists(recording_path):
+            self.logger.info(f"Using existing recording: {recording_path}")
+            # Process existing recording to match desired duration
+            return self._trim_recording(recording_path, output_path, duration)
+        
+        # If no recording available, create accurate UI sequence
+        self.logger.info(f"Creating accurate UI sequence for {feature} with {food_item['name']}")
+        
+        # Get screenshots for camera and results
+        camera_screenshot = self._get_camera_screenshot(food_item)
+        results_screenshot = self._get_results_screenshot(food_item)
+        
+        # Create demo sequence
+        sequence = [
+            {"type": "camera", "image": camera_screenshot, "duration": camera_duration},
+            {"type": "loading", "duration": loading_duration},
+            {"type": "results", "image": results_screenshot, "duration": results_duration,
+             "animations": [
+                 {"type": "macro_bars", "start": 0.2, "duration": 0.5},
+                 {"type": "calorie_count", "start": 0.0, "duration": 0.3}
+             ]}
+        ]
+        
+        # Generate the UI sequence
+        return self._generate_ui_sequence(sequence, output_path, food_item)
+    
+    def _get_camera_screenshot(self, food_item: Dict) -> str:
+        """Get the most appropriate camera screenshot for the food item."""
+        # Look for exact match
+        food_name = food_item["name"].lower().replace(" ", "_")
+        camera_dir = os.path.join(self.screenshots_dir, "camera")
+        
+        for file in os.listdir(camera_dir):
+            if food_name in file.lower() and file.endswith((".png", ".PNG")):
+                return os.path.join(camera_dir, file)
+        
+        # Fallback to any food camera screenshot
+        for file in os.listdir(camera_dir):
+            if "scan" in file.lower() and not "blank" in file.lower() and file.endswith((".png", ".PNG")):
+                return os.path.join(camera_dir, file)
+        
+        # Ultimate fallback to blank camera
+        return os.path.join(camera_dir, "camera_scan_blank.PNG")
+    
+    def _get_results_screenshot(self, food_item: Dict) -> str:
+        """Get the most appropriate results screenshot for the food item."""
+        # Look for exact match
+        food_name = food_item["name"].lower().replace(" ", "_")
+        results_dir = os.path.join(self.screenshots_dir, "results")
+        
+        for file in os.listdir(results_dir):
+            if food_name in file.lower() and file.endswith((".png", ".PNG")):
+                return os.path.join(results_dir, file)
+        
+        # Fallback to any results screenshot
+        if os.listdir(results_dir):
+            return os.path.join(results_dir, os.listdir(results_dir)[0])
+        
+        # Should never reach here if assets are properly set up
+        self.logger.warning("No results screenshots found, will generate dynamically")
+        return None
+    
+    def _generate_ui_sequence(self, sequence: List[Dict], output_path: str, food_item: Dict) -> str:
+        """Generate a video sequence with accurate UI overlays."""
+        # Create temporary directory for frames
+        temp_dir = tempfile.mkdtemp()
+        fps = 30  # Standard FPS for smooth playback
         
         try:
-            # Extract food item from script if not provided
-            if food_item is None and script:
-                food_item = {
-                    "name": script.get("food_item", "avocado toast"),
-                    "calories": script.get("calories", 350),
-                    "protein": script.get("protein", 12),
-                    "carbs": script.get("carbs", 38),
-                    "fat": script.get("fat", 18)
-                }
-            elif food_item is None:
-                # Default food item
-                food_item = {
-                    "name": "avocado toast",
-                        "calories": 350,
-                    "protein": 12, 
-                    "carbs": 38,
-                    "fat": 18
-                }
-                
-            # Create sequence directory
-            output_dir = os.path.dirname(output_path)
-            os.makedirs(output_dir, exist_ok=True)
+            frame_paths = []
+            frame_count = 0
             
-            # Create a simple fallback demo video if all else fails
-            if feature == "food scanning":
-                sequence_name = "scan_to_result"
-            elif feature == "meal tracking":
-                sequence_name = "browse_food_log"
-            else:
-                sequence_name = "scan_to_result"  # Default
+            # Generate frames for each sequence item
+            current_time = 0
+            for item in sequence:
+                item_frames = int(item["duration"] * fps)
                 
-            # Create the fallback video directly - simpler approach
-            self._create_fallback_video(output_path, duration)
-            self.logger.info(f"Created fallback demo for {feature} at {output_path}")
+                if item["type"] == "camera":
+                    # Camera UI frames
+                    for i in range(item_frames):
+                        progress = i / item_frames
+                        frame_path = os.path.join(temp_dir, f"frame_{frame_count:04d}.png")
+                        self._create_camera_frame(item["image"], frame_path, progress)
+                        frame_paths.append(frame_path)
+                        frame_count += 1
+                
+                elif item["type"] == "loading":
+                    # Loading indicator frames
+                    for i in range(item_frames):
+                        progress = i / item_frames
+                        frame_path = os.path.join(temp_dir, f"frame_{frame_count:04d}.png")
+                        self._create_loading_frame(frame_path, progress)
+                        frame_paths.append(frame_path)
+                        frame_count += 1
+                
+                elif item["type"] == "results":
+                    # Results UI frames with animations
+                    for i in range(item_frames):
+                        progress = i / item_frames
+                        frame_path = os.path.join(temp_dir, f"frame_{frame_count:04d}.png")
+                        
+                        # Determine which animations are active
+                        active_animations = {}
+                        for anim in item.get("animations", []):
+                            anim_start = current_time + anim["start"]
+                            anim_end = anim_start + anim["duration"]
+                            frame_time = current_time + (i * (1/fps))
+                            
+                            if anim_start <= frame_time <= anim_end:
+                                # Calculate animation progress (0 to 1)
+                                anim_progress = (frame_time - anim_start) / anim["duration"]
+                                active_animations[anim["type"]] = min(1.0, anim_progress)
+                        
+                        self._create_results_frame(item["image"], frame_path, food_item, active_animations)
+                        frame_paths.append(frame_path)
+                        frame_count += 1
+                
+                current_time += item["duration"]
+            
+            # Combine frames into video
+            self._frames_to_video(frame_paths, output_path, fps)
+            
             return output_path
             
-        except Exception as e:
-            self.logger.error(f"Error creating feature demo: {e}")
-            # Generate a fake video as fallback
-            self._create_fallback_video(output_path, duration)
-            return output_path
+        finally:
+            # Clean up temporary directory
+            shutil.rmtree(temp_dir)
     
-    def _create_fallback_video(self, output_path, duration=5.0):
-        """Create a simple fallback video if all else fails."""
+    def _create_camera_frame(self, image_path: str, output_path: str, progress: float):
+        """Create a frame showing the camera UI."""
+        # Load camera screenshot or create a simulated one
+        if image_path and os.path.exists(image_path):
+            img = Image.open(image_path)
+        else:
+            # Create simulated camera UI
+            img = Image.new('RGB', (1080, 1920), self.theme['colors']['background']['primary']['dark'])
+            draw = ImageDraw.Draw(img)
+            
+            # Draw camera frame guide (corners only, as in the app)
+            w, h = img.size
+            center_w, center_h = w//2, h//2
+            frame_w, frame_h = int(w * 0.8), int(h * 0.4)
+            left = center_w - frame_w//2
+            top = center_h - frame_h//2
+            right = center_w + frame_w//2
+            bottom = center_h + frame_h//2
+            
+            # Draw corners
+            corner_length = 50
+            corner_width = 4
+            corner_color = self.theme['colors']['text']['primary']['dark']
+            
+            # Top left corner
+            draw.line([(left, top), (left + corner_length, top)], fill=corner_color, width=corner_width)
+            draw.line([(left, top), (left, top + corner_length)], fill=corner_color, width=corner_width)
+            
+            # Top right corner
+            draw.line([(right - corner_length, top), (right, top)], fill=corner_color, width=corner_width)
+            draw.line([(right, top), (right, top + corner_length)], fill=corner_color, width=corner_width)
+            
+            # Bottom left corner
+            draw.line([(left, bottom - corner_length), (left, bottom)], fill=corner_color, width=corner_width)
+            draw.line([(left, bottom), (left + corner_length, bottom)], fill=corner_color, width=corner_width)
+            
+            # Bottom right corner
+            draw.line([(right - corner_length, bottom), (right, bottom)], fill=corner_color, width=corner_width)
+            draw.line([(right, bottom - corner_length), (right, bottom)], fill=corner_color, width=corner_width)
+            
+            # Draw capture button at bottom
+            button_radius = 40
+            button_center = (center_w, h - 100)
+            draw.ellipse(
+                [
+                    button_center[0] - button_radius, 
+                    button_center[1] - button_radius,
+                    button_center[0] + button_radius, 
+                    button_center[1] + button_radius
+                ], 
+                fill=corner_color
+            )
+        
+        # Add subtle animation to indicate active scanning (optional)
+        if progress > 0.7:  # Add capture flash effect near the end
+            overlay = Image.new('RGBA', img.size, (255, 255, 255, int(50 * (1.0 - (progress - 0.7) / 0.3))))
+            img = Image.alpha_composite(img.convert('RGBA'), overlay)
+        
+        img.save(output_path)
+    
+    def _create_loading_frame(self, output_path: str, progress: float):
+        """Create a frame showing the loading indicator."""
+        # Create dark background
+        img = Image.new('RGB', (1080, 1920), self.theme['colors']['background']['primary']['dark'])
+        draw = ImageDraw.Draw(img)
+        
+        # Draw loading spinner (simulate iOS spinner with dots)
+        center_x, center_y = img.width // 2, img.height // 2
+        radius = 40
+        num_dots = 8
+        dot_radius = 5
+        
+        for i in range(num_dots):
+            # Calculate position on the circle
+            angle = 2 * np.pi * i / num_dots + (progress * 2 * np.pi)
+            x = center_x + radius * np.cos(angle)
+            y = center_y + radius * np.sin(angle)
+            
+            # Calculate opacity based on position (iOS spinner has fading dots)
+            opacity = int(255 * (0.3 + 0.7 * (i / num_dots)))
+            
+            # Draw the dot
+            dot_color = (255, 255, 255, opacity)
+            draw.ellipse(
+                [(x - dot_radius, y - dot_radius), (x + dot_radius, y + dot_radius)],
+                fill=dot_color
+            )
+        
+        img.save(output_path)
+    
+    def _create_results_frame(self, image_path: str, output_path: str, food_item: Dict, animations: Dict):
+        """Create a frame showing the results UI with animations."""
+        # Load results screenshot or create a simulated one
+        if image_path and os.path.exists(image_path):
+            img = Image.open(image_path)
+        else:
+            # Create simulated results UI
+            img = Image.new('RGB', (1080, 1920), self.theme['colors']['background']['primary']['light'])
+            draw = ImageDraw.Draw(img)
+            
+            # Define layout measurements
+            margin = self.theme['spacing']['m']
+            top_margin = 120
+            content_width = img.width - (margin * 2)
+            
+            # Load and draw logo
+            if os.path.exists(self.logo_path):
+                logo = Image.open(self.logo_path)
+                logo_width = 100
+                logo_height = int(logo.height * (logo_width / logo.width))
+                logo = logo.resize((logo_width, logo_height), Image.LANCZOS)
+                img.paste(logo, (margin, margin), logo if logo.mode == 'RGBA' else None)
+            
+            # Add food image placeholder
+            image_height = int(img.width * 0.5)  # 1:2 aspect ratio
+            draw.rectangle(
+                [(margin, top_margin), (img.width - margin, top_margin + image_height)],
+                fill="#CCCCCC"
+            )
+            
+            # Add food name
+            font_title = self._get_font(24, bold=True)
+            food_name = food_item["name"]
+            draw.text(
+                (margin, top_margin + image_height + margin),
+                food_name,
+                fill=self.theme['colors']['text']['primary']['light'],
+                font=font_title
+            )
+            
+            # Calculate calorie count animation
+            calories = food_item["calories"]
+            if "calorie_count" in animations:
+                # Animate counting up
+                displayed_calories = int(calories * animations["calorie_count"])
+            else:
+                displayed_calories = calories
+                
+            # Add calorie count
+            font_large = self._get_font(40, bold=True)
+            calorie_text = str(displayed_calories)
+            draw.text(
+                (margin, top_margin + image_height + margin + 50),
+                calorie_text,
+                fill=self.theme['colors']['text']['primary']['light'],
+                font=font_large
+            )
+            
+            # Add "calories" label
+            font_small = self._get_font(14)
+            draw.text(
+                (margin + font_large.getsize(calorie_text)[0] + 10, top_margin + image_height + margin + 70),
+                "calories",
+                fill=self.theme['colors']['text']['primary']['light'],
+                font=font_small
+            )
+            
+            # Add macro bars
+            bar_y_start = top_margin + image_height + margin + 120
+            bar_height = 30
+            bar_spacing = 50
+            bar_width = content_width
+            
+            # Function to draw a macro bar
+            def draw_macro_bar(y_pos, label, value, max_value, color, progress=1.0):
+                # Calculate the bar width based on the value and animation progress
+                value_width = int((value / max_value) * bar_width * progress)
+                
+                # Draw label
+                draw.text(
+                    (margin, y_pos), 
+                    f"{label}: {value}g",
+                    fill=self.theme['colors']['text']['primary']['light'],
+                    font=font_small
+                )
+                
+                # Draw background bar
+                draw.rectangle(
+                    [(margin, y_pos + 25), (margin + bar_width, y_pos + 25 + bar_height)],
+                    fill="#EEEEEE",
+                    outline=None,
+                    width=0
+                )
+                
+                # Draw filled bar
+                if value_width > 0:
+                    draw.rectangle(
+                        [(margin, y_pos + 25), (margin + value_width, y_pos + 25 + bar_height)],
+                        fill=color,
+                        outline=None,
+                        width=0
+                    )
+            
+            # Get macro bar animation progress
+            bar_progress = animations.get("macro_bars", 1.0)
+            
+            # Calculate max value for proportional bars
+            max_macro = max(food_item["protein"], food_item["carbs"], food_item["fat"])
+            
+            # Draw macro bars
+            draw_macro_bar(
+                bar_y_start,
+                "Protein",
+                food_item["protein"],
+                max_macro,
+                self.theme['colors']['macro']['protein'],
+                bar_progress
+            )
+            
+            draw_macro_bar(
+                bar_y_start + bar_spacing,
+                "Carbs",
+                food_item["carbs"],
+                max_macro,
+                self.theme['colors']['macro']['carbs'],
+                bar_progress
+            )
+            
+            draw_macro_bar(
+                bar_y_start + bar_spacing * 2,
+                "Fat",
+                food_item["fat"],
+                max_macro,
+                self.theme['colors']['macro']['fat'],
+                bar_progress
+            )
+            
+            # Add "Add to Log" button
+            button_y = bar_y_start + bar_spacing * 3 + 20
+            button_height = 60
+            draw.rectangle(
+                [(margin, button_y), (img.width - margin, button_y + button_height)],
+                fill=self.theme['colors']['text']['primary']['light'],
+                outline=None,
+                width=0
+            )
+            
+            # Add button text
+            button_font = self._get_font(20, bold=True)
+            button_text = "Add to Log"
+            text_width, text_height = button_font.getsize(button_text)
+            text_x = (img.width - text_width) // 2
+            text_y = button_y + (button_height - text_height) // 2
+            draw.text(
+                (text_x, text_y),
+                button_text,
+                fill=self.theme['colors']['background']['primary']['dark'],
+                font=button_font
+            )
+        
+        img.save(output_path)
+    
+    def _get_font(self, size, bold=False):
+        """Get a font with the specified size."""
         try:
-            import cv2
-            import numpy as np
+            if bold:
+                return ImageFont.truetype("Arial Bold.ttf", size)
+            return ImageFont.truetype("Arial.ttf", size)
+        except IOError:
+            # Fallback to default font
+            return ImageFont.load_default()
+    
+    def _frames_to_video(self, frame_paths, output_path, fps=30):
+        """Combine frames into a video."""
+        try:
+            first_frame = Image.open(frame_paths[0])
+            width, height = first_frame.size
             
-            # Create output directory
-            os.makedirs(os.path.dirname(output_path), exist_ok=True)
+            # Use ffmpeg for efficient video creation
+            cmd = [
+                'ffmpeg', '-y',
+                '-framerate', str(fps),
+                '-i', os.path.join(os.path.dirname(frame_paths[0]), 'frame_%04d.png'),
+                '-c:v', 'libx264',
+                '-profile:v', 'high',
+                '-crf', '18',
+                '-pix_fmt', 'yuv420p',
+                output_path
+            ]
             
-            # Video properties
-            width, height = 1080, 1920  # Portrait mode
-            fps = 30
-            
-            # Create a VideoWriter object
-            fourcc = cv2.VideoWriter_fourcc(*'mp4v')
-            out = cv2.VideoWriter(output_path, fourcc, fps, (width, height))
-            
-            # Create a basic frame with text
-            for i in range(int(duration * fps)):
-                # Create a gradient background
-                frame = np.zeros((height, width, 3), dtype=np.uint8)
-                for y in range(height):
-                    for x in range(width):
-                        frame[y, x] = [
-                            int(255 * (1 - y / height)),
-                            int(255 * (0.5 - x / width) + 128),
-                            int(255 * (y / height))
-                        ]
-                
-                # Add app name
-                cv2.putText(frame, "Optimal AI", (width//4, height//3), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 3, (255, 255, 255), 5)
-                
-                # Add feature text
-                cv2.putText(frame, "Calorie Tracking", (width//4, height//2), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 2, (255, 255, 255), 4)
-                
-                # Add animated element
-                progress = i / (duration * fps)
-                radius = int(100 * (1 + 0.5 * np.sin(progress * 2 * np.pi)))
-                cv2.circle(frame, (width//2, 2*height//3), radius, (255, 255, 255), -1)
-                
-                # Write frame to video
-                out.write(frame)
-            
-            # Release video writer
-            out.release()
-            
-            self.logger.info(f"Created fallback video at {output_path}")
+            subprocess.check_call(cmd)
             return output_path
+            
         except Exception as e:
-            self.logger.error(f"Error creating fallback video: {e}")
+            self.logger.error(f"Error creating video from frames: {e}")
             return None
+    
+    def _trim_recording(self, recording_path, output_path, target_duration):
+        """Trim an existing recording to the target duration."""
+        try:
+            cmd = [
+                'ffmpeg', '-y',
+                '-i', recording_path,
+                '-t', str(target_duration),
+                '-c:v', 'libx264',
+                '-crf', '18',
+                '-preset', 'fast',
+                output_path
+            ]
+            
+            subprocess.check_call(cmd)
+            return output_path
+            
+        except Exception as e:
+            self.logger.error(f"Error trimming recording: {e}")
+            return recording_path  # Return original as fallback
 
 
 # Singleton instance

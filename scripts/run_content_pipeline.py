@@ -194,17 +194,21 @@ class ContentPipeline:
                 # Select a random hook template
                 hook = random.choice(HOOK_TEMPLATES)
                 
-                # Create script
+                # Create script - Set concise durations
                 script = {
                     "avatar": avatar,
                     "hook": hook,
-                    "feature": "food scanning" if random.random() < 0.7 else "meal tracking",
+                    "feature": "realtime_tracking",  # Always use realtime tracking
                     "food_item": food_item["name"],
                     "calories": food_item["calories"],
                     "protein": food_item.get("protein", 0),
                     "carbs": food_item.get("carbs", 0),
                     "fat": food_item.get("fat", 0),
-                    "duration": random.randint(5, 13),
+                    "duration": {
+                        "total": random.randint(10, 13),  # Total video duration
+                        "hook": random.randint(4, 5),     # Hook segment duration
+                        "demo": random.randint(5, 7)      # Demo segment duration
+                    },
                     "variation": random.choice(list(avatar_config["variations"].keys()))
                 }
                 
@@ -251,63 +255,111 @@ class ContentPipeline:
                     food_item = {
                         "name": script["food_item"],
                         "calories": script["calories"],
-                        "protein": script.get("protein", 0),
-                        "carbs": script.get("carbs", 0),
-                        "fat": script.get("fat", 0)
+                        "protein": script["protein"],
+                        "carbs": script["carbs"],
+                        "fat": script["fat"]
                     }
                     
-                    # Generate app UI demo
-                    app_demo = self.ui_manager.create_feature_demo(
-                        script["feature"],
-                        os.path.join(self.videos_dir, f"app_demo_{i+1}.mp4"),
-                        duration=5.0,
+                    # Generate UI demo specifically for real-time tracking
+                    logger.info(f"Generating UI demo for real-time tracking of {food_item['name']}")
+                    ui_demo_path = os.path.join(
+                        self.output_dir, 
+                        "ui_demos", 
+                        f"{avatar_name}_{food_item['name'].replace(' ', '_').lower()}_demo.mp4"
+                    )
+                    os.makedirs(os.path.dirname(ui_demo_path), exist_ok=True)
+                    
+                    # Create concise UI demo (5-7 seconds)
+                    ui_demo = self.ui_manager.create_feature_demo(
+                        feature="realtime_tracking",
+                        output_path=ui_demo_path,
                         food_item=food_item,
-                        script=script
+                        duration=script["duration"]["demo"]  # Use the specific demo duration from script
                     )
                     
-                    if not app_demo:
-                        logger.error(f"Failed to generate app demo for script {i+1}")
+                    if not ui_demo or not os.path.exists(ui_demo):
+                        logger.error(f"Failed to generate UI demo for {avatar_name}")
                         continue
                     
-                    # Generate full video
-                    video_path = self.video_generator.generate_complete_video(
-                        avatar_result["avatar_video"],
-                        app_demo,
-                        script,
-                        output_path=os.path.join(self.videos_dir, f"video_{i+1}.mp4")
+                    # Split the avatar video to extract the hook segment
+                    hook_duration = script["duration"]["hook"]
+                    avatar_video = avatar_result["avatar_video"]
+                    hook_segment_path = os.path.join(
+                        self.output_dir, 
+                        "segments", 
+                        f"{avatar_name}_hook.mp4"
+                    )
+                    os.makedirs(os.path.dirname(hook_segment_path), exist_ok=True)
+                    
+                    # Extract the hook segment
+                    logger.info(f"Extracting hook segment for {avatar_name} ({hook_duration}s)")
+                    hook_segment = self.video_generator.extract_segment(
+                        avatar_video,
+                        hook_segment_path,
+                        duration=hook_duration
                     )
                     
-                    if video_path:
-                        logger.info(f"Generated video {i+1}: {video_path}")
-                        self.generated_videos.append(video_path)
-                        
-                        # Enhance video quality (optional post-processing)
-                        self.enhance_video_quality(video_path)
-                    else:
-                        logger.error(f"Failed to generate video for script {i+1}")
-                        
+                    if not hook_segment or not os.path.exists(hook_segment):
+                        logger.error(f"Failed to extract hook segment for {avatar_name}")
+                        continue
+                    
+                    # Combine hook and demo segments
+                    final_video_path = os.path.join(
+                        self.videos_dir, 
+                        f"{avatar_name}_{script['food_item'].replace(' ', '_').lower()}.mp4"
+                    )
+                    
+                    logger.info(f"Combining hook and demo for {avatar_name}")
+                    final_video = self.video_generator.combine_segments(
+                        [hook_segment, ui_demo],
+                        final_video_path,
+                        transition="fade"
+                    )
+                    
+                    if not final_video or not os.path.exists(final_video):
+                        logger.error(f"Failed to create final video for {avatar_name}")
+                        continue
+                    
+                    # Add hook text overlay
+                    logger.info(f"Adding hook text overlay for {avatar_name}")
+                    hook_text = script["hook"]
+                    final_video_with_text = self.video_generator.add_text_overlay(
+                        final_video,
+                        final_video_path,
+                        text=hook_text,
+                        position="bottom",
+                        start_time=1.0,
+                        duration=hook_duration - 1.5
+                    )
+                    
+                    # Track the generated video
+                    self.generated_videos.append({
+                        "path": final_video_with_text,
+                        "avatar": avatar_name,
+                        "script": script
+                    })
+                    
+                    logger.info(f"Successfully generated video for {avatar_name}: {final_video_with_text}")
+                    
                 except Exception as e:
-                    logger.error(f"Error generating video for script {i+1}: {str(e)}")
+                    logger.error(f"Error generating video for {avatar_name}: {e}")
                     logger.error(traceback.format_exc())
             
             logger.info(f"Generated {len(self.generated_videos)} videos")
             
-            # 3. Schedule posts (if requested)
+            # 3. Schedule posts if requested
             if schedule and self.generated_videos:
-                schedule_results = schedule_posts(
-                    self.generated_videos,
-                    platforms=self.config["scheduling"]["platforms"],
-                    optimal_times=self.config["scheduling"]["optimal_times"]
-                )
+                logger.info("Scheduling posts disabled for current phase")
                 
-                logger.info(f"Scheduled {len(schedule_results)} posts")
+            return {
+                "scripts": self.generated_scripts,
+                "videos": self.generated_videos
+            }
             
-            return self.generated_videos
-        
         except Exception as e:
-            logger.error(f"Error in content pipeline: {str(e)}")
+            logger.error(f"Error in content pipeline: {e}")
             logger.error(traceback.format_exc())
-            return []
+            return {"error": str(e)}
 
     def generate_single_video(self, script, avatar_name=None):
         """Generate a single video from a script."""
@@ -435,21 +487,21 @@ def main():
     )
     
     # Run pipeline
-    videos = pipeline.run_full_pipeline(
+    result = pipeline.run_full_pipeline(
         avatar_name=args.avatar,
         script_count=args.scripts,
         video_count=args.videos,
         schedule=not args.no_schedule
     )
     
-    if videos:
-        print(f"\nGenerated {len(videos)} videos:")
-        for i, video in enumerate(videos, 1):
-            print(f"{i}. {video}")
+    if "error" in result:
+        print(f"\nError in content pipeline: {result['error']}")
     else:
-        print("\nNo videos were generated. Check the logs for details.")
+        print(f"\nGenerated {len(result['videos'])} videos:")
+        for i, video in enumerate(result['videos'], 1):
+            print(f"{i}. {video}")
     
-    return 0 if videos else 1
+    return 0 if "error" not in result else 1
 
 if __name__ == "__main__":
     sys.exit(main())

@@ -7,6 +7,7 @@ providing high-quality video generation with optimized performance for L4 GPUs.
 """
 
 import os
+import shutil
 import sys
 import torch
 import logging
