@@ -1,0 +1,10 @@
+---
+description: always try to do extensive logging and error handling in your code.
+globs: 
+alwaysApply: false
+---
+
+# Your rule content
+
+- You can @ files here
+- You can use markdown but dont have to

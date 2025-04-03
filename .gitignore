@@ -1,5 +1,5 @@
 agents/owl
-agents/owl
+agents
 # Python Virtual Environment
 venv/
 env/
@@ -12,49 +12,49 @@ data/raw_videos/
 data/processed_videos/
 
 # Output and generated content
-output/
-generated/
-*.mp4
-*.mov
-*.avi
+# output/
+# generated/
+# *.mp4
+# *.mov
+# *.avi
 
-# Logs and temporary files
-*.log
-logs/
-.DS_Store
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# # Logs and temporary files
+# *.log
+# logs/
+# .DS_Store
+# __pycache__/
+# *.pyc
+# *.pyo
+# *.pyd
+# .Python
+# build/
+# develop-eggs/
+# dist/
+# downloads/
+# eggs/
+# .eggs/
+# lib/
+# lib64/
+# parts/
+# sdist/
+# var/
+# wheels/
+# *.egg-info/
+# .installed.cfg
+# *.egg
 
-# IDE specific files
-.idea/
-.vscode/
-*.swp
-*.swo
-.cursor/
+# # IDE specific files
+# .idea/
+# .vscode/
+# *.swp
+# *.swo
+# .cursor/
 
-# Local development
-local/
-runpod/
+# # Local development
+# local/
+# runpod/
 
-# Models directory - contains large files
-models/
-models/Wan2.1/
+# # Models directory - contains large files
+# models/
+# models/Wan2.1/
 

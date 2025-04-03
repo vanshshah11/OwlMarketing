@@ -390,4 +390,4 @@ if __name__ == "__main__":
             sys.exit(1)
     finally:
         # Always clean up resources
-        generator.cleanup()
+        generator.cleanup() 
