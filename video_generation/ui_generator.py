@@ -21,7 +21,7 @@ from datetime import datetime
 try:
     from .ui_pattern_learner import get_pattern_learner, UITemplateBuilder
 except ImportError:
-    from ui_pattern_learner import get_pattern_learner, UITemplateBuilder
+    from .ui_pattern_learner import get_pattern_learner, UITemplateBuilder
 
 # Set up logging
 logging.basicConfig(
