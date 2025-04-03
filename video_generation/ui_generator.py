@@ -19,7 +19,7 @@ from datetime import datetime
 
 # Local imports
 try:
-    from .ui_pattern_learner import get_pattern_learner, UITemplateBuilder
+    from video_generation.ui_pattern_learner import get_pattern_learner, UITemplateBuilder
 except ImportError:
     from .ui_pattern_learner import get_pattern_learner, UITemplateBuilder
 

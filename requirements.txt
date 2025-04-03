@@ -21,10 +21,11 @@ numpy>=1.24.0
 # Audio processing
 librosa>=0.10.0
 soundfile>=0.12.0
+pydub>=0.25.1
 
 # Utilities
 tqdm>=4.66.0
-requests>=2.31.0
+requests>=2.31.0  # Required for TikTok API and music downloads
 python-dotenv>=1.0.0
 pathlib>=1.0.1
 huggingface_hub>=0.17.3  # For accessing Wan 2.1 models
@@ -32,6 +33,7 @@ huggingface_hub>=0.17.3  # For accessing Wan 2.1 models
 # Analysis
 scipy>=1.11.0
 scikit-learn>=1.3.0
+scikit-image>=0.19.3
 
 # Video editing
 moviepy>=1.0.3
@@ -45,18 +47,10 @@ gradio>=4.0.0
 einops>=0.7.0       # For tensor manipulations
 
 # Data processing
-numpy>=1.24.0
 pandas>=1.5.3
-pillow>=9.5.0
-opencv-python>=4.7.0
-pydub>=0.25.1
-scikit-image>=0.19.3
 matplotlib>=3.7.1
 
 # AI/ML libraries
-tensorflow>=2.12.0
-torch>=2.0.0
-torchvision>=0.15.0
 mediapipe>=0.10.1
 
 # UI generation
@@ -78,3 +72,11 @@ schedule>=1.2.0
 
 # Logging
 loguru>=0.7.0
+
+# TikTok API integration
+requests>=2.31.0  # For API calls
+cachetools>=5.3.0  # For caching API responses
+urllib3>=1.26.15   # For handling URLs
+certifi>=2023.5.7  # For HTTPS certificates
+charset-normalizer>=3.1.0  # For handling encodings
+idna>=3.4          # For international domain names
