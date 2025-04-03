@@ -161,7 +161,7 @@ class VideoEditor:
         
         Args:
             video_path (str): Path to video file
-            music_path (str): Path to music file
+            music_path (str): Path to music file or URL to online music
             output_path (str): Path for output video
             video_volume (float): Volume of video audio
             music_volume (float): Volume of background music
@@ -174,6 +174,43 @@ class VideoEditor:
             video_volume = self.style_config['audio']['mean_level']
         if music_volume is None:
             music_volume = self.style_config['audio']['mean_level'] * 0.6  # Slightly lower than speech
+        
+        # Check if music_path is a URL
+        is_url = music_path.startswith(('http://', 'https://'))
+        
+        # Create temporary file for downloaded music if needed
+        temp_music_file = None
+        if is_url:
+            logging.info(f"Downloading music from URL: {music_path}")
+            import requests
+            import tempfile
+            
+            try:
+                temp_music_file = tempfile.NamedTemporaryFile(delete=False, suffix='.mp3')
+                temp_music_file.close()
+                
+                # Download music file
+                response = requests.get(music_path, stream=True)
+                response.raise_for_status()
+                
+                with open(temp_music_file.name, 'wb') as f:
+                    for chunk in response.iter_content(chunk_size=8192):
+                        f.write(chunk)
+                
+                music_path = temp_music_file.name
+                logging.info(f"Downloaded music to: {music_path}")
+            except Exception as e:
+                logging.error(f"Failed to download music: {e}")
+                if temp_music_file and os.path.exists(temp_music_file.name):
+                    os.unlink(temp_music_file.name)
+                # Fall back to default music if available
+                default_music = os.path.join(self.music_dir, "background.mp3")
+                if os.path.exists(default_music):
+                    logging.info(f"Using default music: {default_music}")
+                    music_path = default_music
+                else:
+                    logging.warning("No music available. Continuing without background music.")
+                    return video_path
         
         # Create FFmpeg command for mixing audio
         try:
@@ -199,10 +236,17 @@ class VideoEditor:
                 output_path
             ], check=True)
             
+            # Clean up temporary file if created
+            if temp_music_file and os.path.exists(temp_music_file.name):
+                os.unlink(temp_music_file.name)
+            
             return output_path
             
         except subprocess.CalledProcessError as e:
             logging.error(f"Error mixing audio: {e}")
+            # Clean up temporary file if created
+            if temp_music_file and os.path.exists(temp_music_file.name):
+                os.unlink(temp_music_file.name)
             # Return original video if audio mixing fails
             return video_path
 

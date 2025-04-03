@@ -219,62 +219,99 @@ def run_video_generation(script, output_dir, project_root, model_dir, batch_id, 
             "fat": script.get("fat", 0)
         }
         
+        # Ensure proper duration structure in script
+        if not isinstance(script.get("duration"), dict):
+            # Convert old duration format to new structure
+            total_duration = script.get("duration", 12)
+            script["duration"] = {
+                "total": total_duration,
+                "hook": min(5, total_duration // 2),
+                "demo": total_duration - min(5, total_duration // 2)
+            }
+            logger.info(f"Converted duration to new format: {script['duration']}")
+        
         # Generate app UI demo
         ui_manager = get_ui_manager()
-        app_demo_path = os.path.join(output_dir, "ui_demos", f"app_demo_{avatar_name}_{batch_id}.mp4")
-        os.makedirs(os.path.dirname(app_demo_path), exist_ok=True)
+        ui_demo_path = os.path.join(output_dir, "ui_demos", f"app_demo_{avatar_name}_{batch_id}.mp4")
+        os.makedirs(os.path.dirname(ui_demo_path), exist_ok=True)
         
-        logger.info(f"Generating UI demo for feature: {script.get('feature', 'food scanning')}")
+        logger.info(f"Generating UI demo for realtime tracking")
         app_demo = ui_manager.create_feature_demo(
-            script.get("feature", "food scanning"),
-            app_demo_path,
-            duration=5.0,
-            food_item=food_item,
-            script=script
+            "realtime_tracking",  # Always use realtime tracking feature
+            ui_demo_path,
+            duration=script["duration"]["demo"],
+            food_item=food_item
         )
         
         if not app_demo or not os.path.exists(app_demo):
             logger.error(f"Failed to generate app demo for {avatar_name}")
             return None
         
-        # Generate full video
+        # Initialize video generator
         video_generator = VideoGenerator(output_dir=os.path.join(output_dir, "videos"))
         
-        # Create avatar-specific output directory
+        # Extract hook segment from avatar video
+        hook_duration = script["duration"]["hook"]
+        avatar_video = avatar_result["avatar_video"]
+        
+        # Create avatar-specific output directory for segments
+        avatar_segments_dir = os.path.join(output_dir, "segments", avatar_name)
+        os.makedirs(avatar_segments_dir, exist_ok=True)
+        
+        hook_segment_path = os.path.join(avatar_segments_dir, f"hook_{batch_id}.mp4")
+        
+        # Extract the hook segment
+        logger.info(f"Extracting hook segment for {avatar_name} ({hook_duration}s)")
+        hook_segment = video_generator.extract_segment(
+            avatar_video,
+            hook_segment_path,
+            duration=hook_duration
+        )
+        
+        if not hook_segment or not os.path.exists(hook_segment):
+            logger.error(f"Failed to extract hook segment for {avatar_name}")
+            return None
+        
+        # Create avatar-specific output directory for final videos
         avatar_videos_dir = os.path.join(output_dir, "videos", "by_avatar", avatar_name)
         os.makedirs(avatar_videos_dir, exist_ok=True)
         
-        output_path = os.path.join(avatar_videos_dir, f"video_{avatar_name}_{batch_id}.mp4")
+        final_video_path = os.path.join(avatar_videos_dir, f"video_{avatar_name}_{batch_id}.mp4")
         
-        logger.info(f"Generating complete video for {avatar_name}")
-        video_path = video_generator.generate_complete_video(
-            avatar_result["avatar_video"],
-            app_demo,
-            script,
-            output_path=output_path
+        # Combine hook and demo segments
+        logger.info(f"Combining hook and demo for {avatar_name}")
+        final_video = video_generator.combine_segments(
+            [hook_segment, app_demo],
+            final_video_path,
+            transition="fade"
         )
         
-        if video_path and os.path.exists(video_path):
-            logger.info(f"Successfully generated video: {video_path}")
-            
-            # Also copy to the main videos directory for compatibility
-            main_video_dir = os.path.join(output_dir, "videos")
-            main_video_path = os.path.join(main_video_dir, f"video_{avatar_name}_{batch_id}.mp4")
-            shutil.copy2(video_path, main_video_path)
-            
-            return {
-                "avatar": avatar_name,
-                "video_path": video_path,
-                "main_path": main_video_path,
-                "app_demo_path": app_demo,
-                "avatar_video_path": avatar_result["avatar_video"]
-            }
-        else:
-            logger.error(f"Failed to generate complete video for {avatar_name}")
+        if not final_video or not os.path.exists(final_video):
+            logger.error(f"Failed to create final video for {avatar_name}")
             return None
-    
+        
+        # Add hook text overlay
+        logger.info(f"Adding hook text overlay for {avatar_name}")
+        hook_text = script.get("hook", "")
+        if hook_text:
+            final_video_with_text = video_generator.add_text_overlay(
+                final_video,
+                final_video_path,
+                text=hook_text,
+                position="bottom",
+                start_time=1.0,
+                duration=hook_duration - 1.5
+            )
+            logger.info(f"Added hook text overlay")
+            result_video = final_video_with_text
+        else:
+            result_video = final_video
+        
+        logger.info(f"Successfully generated video: {result_video}")
+        return result_video
+        
     except Exception as e:
-        logger.error(f"Error in video generation: {e}")
+        logger.error(f"Error generating video: {e}")
         import traceback
         logger.error(traceback.format_exc())
         return None

@@ -19,7 +19,8 @@ sys.path.append(str(project_root))
 
 from video_generation.context_ui_integrator import get_context_ui_integrator
 from video_generation.app_ui_manager import get_ui_manager
-from video_generation.generate_video import generate_video_from_script
+# Updated import to use ContentPipeline
+from scripts.run_content_pipeline import ContentPipeline
 from video_editing.edit_video import VideoEditor
 
 # Configure logging
@@ -134,71 +135,52 @@ def test_context_aware_video_generation():
     """Test video generation with context-aware UI."""
     logger.info("Testing context-aware video generation...")
     
+    # Create output directory for test videos
+    output_dir = os.path.join(project_root, "output", "test_context_ui")
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Initialize ContentPipeline for video generation
+    pipeline = ContentPipeline(output_dir=output_dir)
+    
     # Create test script with food item context
     test_script = {
         "title": "Quick Calorie Tracking Demo",
         "description": "Demonstrating how easy it is to track calories with Optimal AI",
-        "avatar": {
-            "name": "sarah",
-            "style": "demo"
-        },
-        "scenes": [
-            {
-                "type": "talking_head",
-                "duration": 3.0,
-                "text": "Struggling to track calories for your pizza? 🍕",
-                "lines": [
-                    {"text": "Struggling to track calories for your pizza?", "duration": 3.0}
-                ]
-            },
-            {
-                "type": "app_scan_demo",
-                "duration": 4.0,
-                "text": "Just open Optimal AI and scan your food!",
-                "lines": [
-                    {"text": "Just open Optimal AI and scan your food!", "duration": 4.0}
-                ]
-            },
-            {
-                "type": "app_results_demo",
-                "duration": 3.0,
-                "text": "Instantly see calories, nutrients, and more!",
-                "lines": [
-                    {"text": "Instantly see calories, nutrients, and more!", "duration": 3.0}
-                ]
-            },
-            {
-                "type": "app_history_demo",
-                "duration": 3.0,
-                "text": "Track your daily intake without the hassle!",
-                "lines": [
-                    {"text": "Track your daily intake without the hassle!", "duration": 3.0}
-                ]
-            },
-            {
-                "type": "talking_head",
-                "duration": 3.0,
-                "text": "Download Optimal AI today! 📱✨",
-                "lines": [
-                    {"text": "Download Optimal AI today!", "duration": 3.0}
-                ]
-            }
-        ]
+        "avatar": "sarah",
+        "variation": "talking_head",
+        "hook": "Struggling to track calories for your pizza? 🍕 Just open Optimal AI!",
+        "feature": "realtime_tracking",
+        "food_item": "pizza",
+        "calories": 320,
+        "protein": 15,
+        "carbs": 42,
+        "fat": 18,
+        "duration": {
+            "total": 12,
+            "hook": 5,
+            "demo": 7
+        }
     }
     
     # Save test script to disk for reference
-    with open("test_script.json", "w") as f:
+    script_path = os.path.join(output_dir, "test_script.json")
+    with open(script_path, "w") as f:
         json.dump(test_script, f, indent=2)
     
+    logger.info(f"Created test script: {script_path}")
+    
     try:
-        # Generate video with context-aware UI
-        output_path = generate_video_from_script(
-            script=test_script,
-            output_path="context_aware_demo.mp4"
-        )
-        logger.info(f"Generated context-aware video: {output_path}")
+        # Generate video with context-aware UI using ContentPipeline
+        output_path = pipeline.generate_single_video(test_script)
+        
+        if output_path and os.path.exists(output_path):
+            logger.info(f"Generated context-aware video: {output_path}")
+        else:
+            logger.error("Failed to generate context-aware video")
     except Exception as e:
         logger.error(f"Error generating video: {e}")
+        import traceback
+        logger.error(traceback.format_exc())
 
 if __name__ == "__main__":
     logger.info("Starting Context-Aware UI Generator test")

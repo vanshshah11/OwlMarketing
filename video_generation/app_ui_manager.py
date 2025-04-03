@@ -18,6 +18,7 @@ import subprocess
 import tempfile
 from PIL import Image, ImageDraw, ImageFont
 import numpy as np
+import math
 
 # Local imports
 from .ui_generator import get_ui_generator, FoodItem
@@ -537,15 +538,17 @@ class AppUIManager:
             food_item = {
                 "name": "Avocado Toast",
                 "calories": 350,
-                "protein": 12,
+                "protein": 12, 
                 "carbs": 38,
                 "fat": 18
             }
         
         # Calculate exact timings for a concise demo
-        camera_duration = 2.0  # 2 seconds on camera screen
-        loading_duration = 0.5  # 0.5 seconds loading
-        results_duration = duration - camera_duration - loading_duration  # Remaining time for results
+        # Adjusted timings based on analysis of real recordings
+        home_duration = 0.8  # Brief glimpse of home screen
+        camera_duration = 1.8  # 1.8 seconds on camera screen
+        loading_duration = 0.7  # 0.7 seconds loading - increased for visibility
+        results_duration = duration - home_duration - camera_duration - loading_duration  # Remaining time for results
         
         # Find relevant UI assets (prioritize existing recordings)
         recording_path = None
@@ -569,24 +572,62 @@ class AppUIManager:
         # If no recording available, create accurate UI sequence
         self.logger.info(f"Creating accurate UI sequence for {feature} with {food_item['name']}")
         
-        # Get screenshots for camera and results
+        # Get screenshots for each screen in the sequence (including home screen)
+        home_screenshot = self._get_home_screenshot(food_item, before_scan=True) 
         camera_screenshot = self._get_camera_screenshot(food_item)
         results_screenshot = self._get_results_screenshot(food_item)
         
-        # Create demo sequence
+        # Create demo sequence with proper transitions and animations
         sequence = [
-            {"type": "camera", "image": camera_screenshot, "duration": camera_duration},
-            {"type": "loading", "duration": loading_duration},
+            {"type": "home", "image": home_screenshot, "duration": home_duration,
+             "animations": [
+                 {"type": "tap_button", "start": 0.2, "duration": 0.2, "target": "scan_button"}
+             ]},
+            {"type": "camera", "image": camera_screenshot, "duration": camera_duration,
+             "animations": [
+                 {"type": "scan_guide", "start": 0.3, "duration": 0.6},
+                 {"type": "flash", "start": camera_duration - 0.4, "duration": 0.2}
+             ]},
+            {"type": "loading", "duration": loading_duration,
+             "animations": [
+                 {"type": "pulse", "start": 0.1, "duration": loading_duration - 0.2}
+             ]},
             {"type": "results", "image": results_screenshot, "duration": results_duration,
              "animations": [
-                 {"type": "macro_bars", "start": 0.2, "duration": 0.5},
-                 {"type": "calorie_count", "start": 0.0, "duration": 0.3}
+                 {"type": "calorie_count", "start": 0.2, "duration": 0.6},
+                 {"type": "protein_bar", "start": 0.4, "duration": 0.6},
+                 {"type": "carbs_bar", "start": 0.6, "duration": 0.6},
+                 {"type": "fat_bar", "start": 0.8, "duration": 0.6},
+                 {"type": "success_indicator", "start": results_duration - 0.8, "duration": 0.5}
              ]}
         ]
         
         # Generate the UI sequence
         return self._generate_ui_sequence(sequence, output_path, food_item)
-    
+
+    def _get_home_screenshot(self, food_item: Dict, before_scan: bool = True) -> str:
+        """Get a home screen screenshot."""
+        # Search for a matching home screenshot
+        if before_scan:
+            home_path = os.path.join(self.screenshots_dir, "home_beforelog", "home_nothing_logged.PNG")
+        else:
+            # Try to find a matching food item
+            food_name = food_item["name"].lower()
+            for file in os.listdir(os.path.join(self.screenshots_dir, "home_afterlog")):
+                if food_name in file.lower():
+                    home_path = os.path.join(self.screenshots_dir, "home_afterlog", file)
+                    break
+            else:
+                # Default to first available
+                home_files = list(Path(os.path.join(self.screenshots_dir, "home_afterlog")).glob("*.PNG"))
+                if home_files:
+                    home_path = str(home_files[0])
+                else:
+                    # Fallback if no files found
+                    home_path = os.path.join(self.screenshots_dir, "home_beforelog", "home_nothing_logged.PNG")
+        
+        return home_path
+
     def _get_camera_screenshot(self, food_item: Dict) -> str:
         """Get the most appropriate camera screenshot for the food item."""
         # Look for exact match
@@ -635,24 +676,83 @@ class AppUIManager:
             
             # Generate frames for each sequence item
             current_time = 0
+            previous_image = None
+            
             for item in sequence:
                 item_frames = int(item["duration"] * fps)
                 
-                if item["type"] == "camera":
+                if item["type"] == "home":
+                    # Home screen UI frames
+                    for i in range(item_frames):
+                        progress = i / item_frames
+                        frame_path = os.path.join(temp_dir, f"frame_{frame_count:04d}.png")
+                        
+                        # Get animation states
+                        active_animations = {}
+                        for anim in item.get("animations", []):
+                            anim_start = item["duration"] * anim["start"] / item["duration"]
+                            anim_end = anim_start + anim["duration"]
+                            frame_time = item["duration"] * (i / item_frames)
+                            
+                            if anim_start <= frame_time <= anim_end:
+                                # Calculate animation progress (0 to 1)
+                                anim_progress = (frame_time - anim_start) / anim["duration"]
+                                active_animations[anim["type"]] = min(1.0, anim_progress)
+                        
+                        # Use PIL to create a frame from the screenshot
+                        self._create_home_frame(item["image"], frame_path, progress, active_animations)
+                        frame_paths.append(frame_path)
+                        frame_count += 1
+                        previous_image = item["image"]
+                
+                elif item["type"] == "camera":
                     # Camera UI frames
                     for i in range(item_frames):
                         progress = i / item_frames
                         frame_path = os.path.join(temp_dir, f"frame_{frame_count:04d}.png")
-                        self._create_camera_frame(item["image"], frame_path, progress)
+                        
+                        # Get animation states
+                        active_animations = {}
+                        for anim in item.get("animations", []):
+                            anim_start = item["duration"] * anim["start"] / item["duration"]
+                            anim_end = anim_start + anim["duration"]
+                            frame_time = item["duration"] * (i / item_frames)
+                            
+                            if anim_start <= frame_time <= anim_end:
+                                # Calculate animation progress (0 to 1)
+                                anim_progress = (frame_time - anim_start) / anim["duration"]
+                                active_animations[anim["type"]] = min(1.0, anim_progress)
+                        
+                        # For the first few frames, blend from home to camera for smooth transition
+                        if previous_image and i < fps * 0.2:  # 0.2 seconds transition
+                            blend_ratio = i / (fps * 0.2)
+                            self._create_transition_frame(previous_image, item["image"], frame_path, blend_ratio)
+                        else:
+                            self._create_camera_frame(item["image"], frame_path, progress, active_animations)
+                        
                         frame_paths.append(frame_path)
                         frame_count += 1
+                        previous_image = item["image"]
                 
                 elif item["type"] == "loading":
-                    # Loading indicator frames
+                    # Loading indicator frames 
                     for i in range(item_frames):
                         progress = i / item_frames
                         frame_path = os.path.join(temp_dir, f"frame_{frame_count:04d}.png")
-                        self._create_loading_frame(frame_path, progress)
+                        
+                        # Get animation states
+                        active_animations = {}
+                        for anim in item.get("animations", []):
+                            anim_start = item["duration"] * anim["start"] / item["duration"]
+                            anim_end = anim_start + anim["duration"]
+                            frame_time = item["duration"] * (i / item_frames)
+                            
+                            if anim_start <= frame_time <= anim_end:
+                                # Calculate animation progress (0 to 1)
+                                anim_progress = (frame_time - anim_start) / anim["duration"]
+                                active_animations[anim["type"]] = min(1.0, anim_progress)
+                                
+                        self._create_loading_frame(frame_path, progress, active_animations)
                         frame_paths.append(frame_path)
                         frame_count += 1
                 
@@ -661,20 +761,31 @@ class AppUIManager:
                     for i in range(item_frames):
                         progress = i / item_frames
                         frame_path = os.path.join(temp_dir, f"frame_{frame_count:04d}.png")
-                        
+                
                         # Determine which animations are active
                         active_animations = {}
                         for anim in item.get("animations", []):
-                            anim_start = current_time + anim["start"]
+                            anim_start = item["duration"] * anim["start"] / item["duration"]
                             anim_end = anim_start + anim["duration"]
-                            frame_time = current_time + (i * (1/fps))
+                            frame_time = item["duration"] * (i / item_frames)
                             
                             if anim_start <= frame_time <= anim_end:
                                 # Calculate animation progress (0 to 1)
                                 anim_progress = (frame_time - anim_start) / anim["duration"]
                                 active_animations[anim["type"]] = min(1.0, anim_progress)
                         
-                        self._create_results_frame(item["image"], frame_path, food_item, active_animations)
+                        # For the first few frames, blend from loading to results for smooth transition
+                        if i < fps * 0.2:  # 0.2 seconds transition
+                            blend_ratio = i / (fps * 0.2)
+                            # Create a blank loading frame to transition from
+                            temp_loading_path = os.path.join(temp_dir, "temp_loading.png")
+                            self._create_loading_frame(temp_loading_path, 0.9, {"pulse": 0.9})
+                            self._create_transition_frame(temp_loading_path, item["image"], frame_path, blend_ratio, 
+                                                         keep_animations=True, result_animations=active_animations, 
+                                                         food_item=food_item)
+                        else:
+                            self._create_results_frame(item["image"], frame_path, food_item, active_animations)
+                        
                         frame_paths.append(frame_path)
                         frame_count += 1
                 
@@ -689,258 +800,380 @@ class AppUIManager:
             # Clean up temporary directory
             shutil.rmtree(temp_dir)
     
-    def _create_camera_frame(self, image_path: str, output_path: str, progress: float):
-        """Create a frame showing the camera UI."""
-        # Load camera screenshot or create a simulated one
-        if image_path and os.path.exists(image_path):
-            img = Image.open(image_path)
-        else:
-            # Create simulated camera UI
-            img = Image.new('RGB', (1080, 1920), self.theme['colors']['background']['primary']['dark'])
+    def _create_home_frame(self, image_path: str, output_path: str, progress: float, animations: Dict = None):
+        """Create a frame showing the home screen with potential animations."""
+        if animations is None:
+            animations = {}
+            
+        try:
+            # Load base image
+            img = Image.open(image_path).convert("RGBA")
+            
+            # Create a drawing context
             draw = ImageDraw.Draw(img)
             
-            # Draw camera frame guide (corners only, as in the app)
-            w, h = img.size
-            center_w, center_h = w//2, h//2
-            frame_w, frame_h = int(w * 0.8), int(h * 0.4)
-            left = center_w - frame_w//2
-            top = center_h - frame_h//2
-            right = center_w + frame_w//2
-            bottom = center_h + frame_h//2
-            
-            # Draw corners
-            corner_length = 50
-            corner_width = 4
-            corner_color = self.theme['colors']['text']['primary']['dark']
-            
-            # Top left corner
-            draw.line([(left, top), (left + corner_length, top)], fill=corner_color, width=corner_width)
-            draw.line([(left, top), (left, top + corner_length)], fill=corner_color, width=corner_width)
-            
-            # Top right corner
-            draw.line([(right - corner_length, top), (right, top)], fill=corner_color, width=corner_width)
-            draw.line([(right, top), (right, top + corner_length)], fill=corner_color, width=corner_width)
-            
-            # Bottom left corner
-            draw.line([(left, bottom - corner_length), (left, bottom)], fill=corner_color, width=corner_width)
-            draw.line([(left, bottom), (left + corner_length, bottom)], fill=corner_color, width=corner_width)
-            
-            # Bottom right corner
-            draw.line([(right - corner_length, bottom), (right, bottom)], fill=corner_color, width=corner_width)
-            draw.line([(right, bottom - corner_length), (right, bottom)], fill=corner_color, width=corner_width)
-            
-            # Draw capture button at bottom
-            button_radius = 40
-            button_center = (center_w, h - 100)
-            draw.ellipse(
-                [
-                    button_center[0] - button_radius, 
-                    button_center[1] - button_radius,
-                    button_center[0] + button_radius, 
-                    button_center[1] + button_radius
-                ], 
-                fill=corner_color
-            )
-        
-        # Add subtle animation to indicate active scanning (optional)
-        if progress > 0.7:  # Add capture flash effect near the end
-            overlay = Image.new('RGBA', img.size, (255, 255, 255, int(50 * (1.0 - (progress - 0.7) / 0.3))))
-            img = Image.alpha_composite(img.convert('RGBA'), overlay)
-        
-        img.save(output_path)
-    
-    def _create_loading_frame(self, output_path: str, progress: float):
-        """Create a frame showing the loading indicator."""
-        # Create dark background
-        img = Image.new('RGB', (1080, 1920), self.theme['colors']['background']['primary']['dark'])
-        draw = ImageDraw.Draw(img)
-        
-        # Draw loading spinner (simulate iOS spinner with dots)
-        center_x, center_y = img.width // 2, img.height // 2
-        radius = 40
-        num_dots = 8
-        dot_radius = 5
-        
-        for i in range(num_dots):
-            # Calculate position on the circle
-            angle = 2 * np.pi * i / num_dots + (progress * 2 * np.pi)
-            x = center_x + radius * np.cos(angle)
-            y = center_y + radius * np.sin(angle)
-            
-            # Calculate opacity based on position (iOS spinner has fading dots)
-            opacity = int(255 * (0.3 + 0.7 * (i / num_dots)))
-            
-            # Draw the dot
-            dot_color = (255, 255, 255, opacity)
-            draw.ellipse(
-                [(x - dot_radius, y - dot_radius), (x + dot_radius, y + dot_radius)],
-                fill=dot_color
-            )
-        
-        img.save(output_path)
-    
-    def _create_results_frame(self, image_path: str, output_path: str, food_item: Dict, animations: Dict):
-        """Create a frame showing the results UI with animations."""
-        # Load results screenshot or create a simulated one
-        if image_path and os.path.exists(image_path):
-            img = Image.open(image_path)
-        else:
-            # Create simulated results UI
-            img = Image.new('RGB', (1080, 1920), self.theme['colors']['background']['primary']['light'])
-            draw = ImageDraw.Draw(img)
-            
-            # Define layout measurements
-            margin = self.theme['spacing']['m']
-            top_margin = 120
-            content_width = img.width - (margin * 2)
-            
-            # Load and draw logo
-            if os.path.exists(self.logo_path):
-                logo = Image.open(self.logo_path)
-                logo_width = 100
-                logo_height = int(logo.height * (logo_width / logo.width))
-                logo = logo.resize((logo_width, logo_height), Image.LANCZOS)
-                img.paste(logo, (margin, margin), logo if logo.mode == 'RGBA' else None)
-            
-            # Add food image placeholder
-            image_height = int(img.width * 0.5)  # 1:2 aspect ratio
-            draw.rectangle(
-                [(margin, top_margin), (img.width - margin, top_margin + image_height)],
-                fill="#CCCCCC"
-            )
-            
-            # Add food name
-            font_title = self._get_font(24, bold=True)
-            food_name = food_item["name"]
-            draw.text(
-                (margin, top_margin + image_height + margin),
-                food_name,
-                fill=self.theme['colors']['text']['primary']['light'],
-                font=font_title
-            )
-            
-            # Calculate calorie count animation
-            calories = food_item["calories"]
-            if "calorie_count" in animations:
-                # Animate counting up
-                displayed_calories = int(calories * animations["calorie_count"])
-            else:
-                displayed_calories = calories
+            # Handle tap animation on scan button if present
+            if "tap_button" in animations and animations["tap_button"] > 0:
+                # Locate the scan button position (approximate based on UI)
+                button_x, button_y = img.width // 2, int(img.height * 0.9)
+                button_radius = int(img.width * 0.1)
                 
-            # Add calorie count
-            font_large = self._get_font(40, bold=True)
-            calorie_text = str(displayed_calories)
-            draw.text(
-                (margin, top_margin + image_height + margin + 50),
-                calorie_text,
-                fill=self.theme['colors']['text']['primary']['light'],
-                font=font_large
-            )
-            
-            # Add "calories" label
-            font_small = self._get_font(14)
-            draw.text(
-                (margin + font_large.getsize(calorie_text)[0] + 10, top_margin + image_height + margin + 70),
-                "calories",
-                fill=self.theme['colors']['text']['primary']['light'],
-                font=font_small
-            )
-            
-            # Add macro bars
-            bar_y_start = top_margin + image_height + margin + 120
-            bar_height = 30
-            bar_spacing = 50
-            bar_width = content_width
-            
-            # Function to draw a macro bar
-            def draw_macro_bar(y_pos, label, value, max_value, color, progress=1.0):
-                # Calculate the bar width based on the value and animation progress
-                value_width = int((value / max_value) * bar_width * progress)
-                
-                # Draw label
-                draw.text(
-                    (margin, y_pos), 
-                    f"{label}: {value}g",
-                    fill=self.theme['colors']['text']['primary']['light'],
-                    font=font_small
+                # Draw tap animation
+                tap_progress = animations["tap_button"]
+                tap_color = (255, 255, 255, int(128 * (1 - tap_progress)))
+                draw.ellipse(
+                    (button_x - button_radius, button_y - button_radius,
+                     button_x + button_radius, button_y + button_radius),
+                    fill=tap_color, outline=None
                 )
+            
+            # Save the frame
+            img.save(output_path, format="PNG")
+            
+        except Exception as e:
+            self.logger.error(f"Error creating home frame: {e}")
+            # Fallback to just copying the original image
+            shutil.copy(image_path, output_path)
+    
+    def _create_transition_frame(self, from_image: str, to_image: str, output_path: str, blend_ratio: float, 
+                                keep_animations: bool = False, result_animations: Dict = None, food_item: Dict = None):
+        """Create a transition frame blending between two screens."""
+        try:
+            # Load images
+            from_img = Image.open(from_image).convert("RGBA")
+            to_img = Image.open(to_image).convert("RGBA")
+            
+            # Resize if needed
+            if from_img.size != to_img.size:
+                to_img = to_img.resize(from_img.size, Image.LANCZOS)
+            
+            # Blend images
+            blended = Image.blend(from_img, to_img, blend_ratio)
+            
+            # If keeping animations for results screen transitions
+            if keep_animations and result_animations and food_item:
+                draw = ImageDraw.Draw(blended)
                 
-                # Draw background bar
+                # Draw results animations on top if needed
+                if blend_ratio > 0.5 and any(k in result_animations for k in ["calorie_count", "protein_bar", "carbs_bar", "fat_bar"]):
+                    # Draw partial results animations based on the blend ratio
+                    animation_progress = (blend_ratio - 0.5) * 2  # Scale to 0-1 range
+                    
+                    # Create temporary animations dict with scaled progress
+                    scaled_animations = {}
+                    for k, v in result_animations.items():
+                        scaled_animations[k] = v * animation_progress
+                    
+                    # Apply result animations to the blended image
+                    self._apply_result_animations(blended, draw, food_item, scaled_animations)
+            
+            # Save the frame
+            blended.save(output_path, format="PNG")
+            
+        except Exception as e:
+            self.logger.error(f"Error creating transition frame: {e}")
+            # Fallback to just copying the target image
+            shutil.copy(to_image, output_path)
+    
+    def _create_camera_frame(self, image_path: str, output_path: str, progress: float, animations: Dict = None):
+        """Create a frame showing the camera UI with scanning animation."""
+        if animations is None:
+            animations = {}
+            
+        try:
+            # Load base image
+            img = Image.open(image_path).convert("RGBA")
+            
+            # Create a drawing context
+            draw = ImageDraw.Draw(img)
+            
+            # Add scan guide animation
+            if "scan_guide" in animations and animations["scan_guide"] > 0:
+                scan_progress = animations["scan_guide"]
+                
+                # Calculate scanning line position
+                scan_y = int(img.height * 0.4 + (img.height * 0.2 * scan_progress))
+                
+                # Draw scanning line
+                line_color = (75, 181, 67, 180)  # Semi-transparent green
+                line_width = 2
+                draw.line([(int(img.width * 0.2), scan_y), (int(img.width * 0.8), scan_y)], 
+                          fill=line_color, width=line_width)
+                
+                # Draw small circle indicators at ends
+                circle_radius = 5
+                draw.ellipse((int(img.width * 0.2) - circle_radius, scan_y - circle_radius,
+                             int(img.width * 0.2) + circle_radius, scan_y + circle_radius),
+                             fill=line_color)
+                draw.ellipse((int(img.width * 0.8) - circle_radius, scan_y - circle_radius,
+                             int(img.width * 0.8) + circle_radius, scan_y + circle_radius),
+                             fill=line_color)
+            
+            # Add capture button flash animation
+            if "flash" in animations and animations["flash"] > 0:
+                flash_progress = animations["flash"]
+                
+                # Create a semi-transparent white layer for flash effect
+                flash_opacity = int(200 * (1 - flash_progress))  # Fade out
+                flash_overlay = Image.new("RGBA", img.size, (255, 255, 255, flash_opacity))
+                
+                # Composite the flash over the image
+                img = Image.alpha_composite(img, flash_overlay)
+            
+            # Save the frame
+            img.save(output_path, format="PNG")
+            
+        except Exception as e:
+            self.logger.error(f"Error creating camera frame: {e}")
+            # Fallback to just copying the original image
+            shutil.copy(image_path, output_path)
+
+    def _create_loading_frame(self, output_path: str, progress: float, animations: Dict = None):
+        """Create a loading animation frame."""
+        if animations is None:
+            animations = {}
+            
+        try:
+            # Set up frame dimensions to match typical screenshots
+            width, height = 1080, 2340
+            
+            # Create base image (dark translucent background)
+            img = Image.new("RGBA", (width, height), (0, 0, 0, 180))
+            draw = ImageDraw.Draw(img)
+            
+            # Get colors from config
+            color_scheme = self._ui_config.get("color_scheme", {})
+            primary_color = color_scheme.get("primary", "#000000")
+            accent_color = color_scheme.get("accent", "#FF9500")
+            
+            # Convert hex to RGB
+            def hex_to_rgb(hex_color):
+                hex_color = hex_color.lstrip('#')
+                return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+            
+            accent_rgb = hex_to_rgb(accent_color)
+            
+            # Add "Analyzing" text
+            font_size = 36
+            font = self._get_font(font_size, bold=True)
+            text = "Analyzing..."
+            text_width = draw.textlength(text, font=font)
+            text_position = ((width - text_width) // 2, height // 2 - 100)
+            draw.text(text_position, text, fill=(255, 255, 255, 255), font=font)
+            
+            # Draw loading spinner animation
+            center_x, center_y = width // 2, height // 2
+            outer_radius = 50
+            inner_radius = 40
+            
+            # Handle pulsing animation
+            pulse_scale = 1.0
+            if "pulse" in animations:
+                # Calculate pulse effect (0.8 to 1.2 scale)
+                pulse_progress = animations["pulse"]
+                pulse_scale = 0.8 + 0.4 * abs(math.sin(pulse_progress * math.pi))
+            
+            # Adjust radii with pulse
+            outer_radius = int(outer_radius * pulse_scale)
+            inner_radius = int(inner_radius * pulse_scale)
+            
+            # Rotating progress arc
+            start_angle = progress * 360 * 5  # Rotate 5 times during the animation
+            arc_length = 120  # 120 degrees arc
+            
+            # Draw background circle
+            draw.ellipse((center_x - outer_radius, center_y - outer_radius,
+                          center_x + outer_radius, center_y + outer_radius),
+                         fill=(255, 255, 255, 50))
+            
+            # Draw progress arc
+            # Since PIL doesn't have direct arc drawing with width, we'll use the difference
+            # between two ellipses to create a thick arc
+            # This is a simplified approach - a proper arc would require more complex calculations
+            
+            # Convert arc angles to coordinates on the circle
+            def get_point_on_circle(center, radius, angle_degrees):
+                angle_rad = math.radians(angle_degrees)
+                x = center[0] + radius * math.cos(angle_rad)
+                y = center[1] + radius * math.sin(angle_rad)
+                return (x, y)
+            
+            # Draw several small segments to approximate an arc
+            segments = 20
+            arc_color = accent_rgb + (255,)  # Add alpha channel
+            arc_thickness = outer_radius - inner_radius
+            
+            for i in range(segments + 1):
+                angle = start_angle + (i * arc_length / segments)
+                point = get_point_on_circle((center_x, center_y), (outer_radius + inner_radius) / 2, angle)
+                circle_radius = arc_thickness / 2
+                draw.ellipse((point[0] - circle_radius, point[1] - circle_radius,
+                              point[0] + circle_radius, point[1] + circle_radius),
+                             fill=arc_color)
+            
+            # Save the frame
+            img.save(output_path, format="PNG")
+            
+        except Exception as e:
+            self.logger.error(f"Error creating loading frame: {e}")
+            # Create a simple fallback frame
+            fallback_img = Image.new("RGB", (1080, 2340), (0, 0, 0))
+            fallback_img.save(output_path, format="PNG")
+
+    def _create_results_frame(self, image_path: str, output_path: str, food_item: Dict, animations: Dict = None):
+        """Create a results screen frame with animated elements."""
+        if animations is None:
+            animations = {}
+            
+        try:
+            # Load base image
+            img = Image.open(image_path).convert("RGBA")
+            draw = ImageDraw.Draw(img)
+            
+            # Apply result animations
+            self._apply_result_animations(img, draw, food_item, animations)
+            
+            # Save the frame
+            img.save(output_path, format="PNG")
+            
+        except Exception as e:
+            self.logger.error(f"Error creating results frame: {e}")
+            # Fallback to just copying the original image
+            shutil.copy(image_path, output_path)
+    
+    def _apply_result_animations(self, img, draw, food_item: Dict, animations: Dict):
+        """Apply results screen animations to the provided image."""
+        width, height = img.size
+        
+        # Get colors from config
+        color_scheme = self._ui_config.get("color_scheme", {})
+        macro_colors = color_scheme.get("macro", {})
+        protein_color = macro_colors.get("protein", "#FF3B30")
+        carbs_color = macro_colors.get("carbs", "#FF9500")
+        fat_color = macro_colors.get("fat", "#007AFF")
+        
+        # Convert hex to RGB
+        def hex_to_rgb(hex_color):
+            hex_color = hex_color.lstrip('#')
+            return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+        
+        # Extract macro values
+        calories = food_item.get("calories", 0)
+        protein = food_item.get("protein", 0)
+        carbs = food_item.get("carbs", 0)
+        fat = food_item.get("fat", 0)
+        
+        # Define regions for animations (approximate based on standard results screen)
+        calorie_region = (width // 2, int(height * 0.35))
+        macro_bar_y = {
+            "protein": int(height * 0.5),
+            "carbs": int(height * 0.6),
+            "fat": int(height * 0.7)
+        }
+        macro_bar_width = int(width * 0.7)
+        macro_bar_height = int(height * 0.03)
+        macro_bar_x_start = int(width * 0.15)
+        
+        # Handle calorie counter animation
+        if "calorie_count" in animations and animations["calorie_count"] > 0:
+            # Animate counting up to the calorie value
+            calorie_progress = animations["calorie_count"]
+            displayed_calories = int(calories * calorie_progress)
+            
+            # Create a semi-transparent overlay to "erase" the original calorie text
+            # Note: This is a simplified approach, a proper implementation would identify the exact location
+            calorie_overlay = Image.new("RGBA", (300, 100), (255, 255, 255, 0))
+            calorie_overlay_draw = ImageDraw.Draw(calorie_overlay)
+            calorie_font = self._get_font(64, bold=True)
+            calorie_text = f"{displayed_calories}"
+            calorie_overlay_draw.text((150, 50), calorie_text, fill=(0, 0, 0, 255), font=calorie_font, anchor="mm")
+            
+            # Position the overlay over the calorie text area
+            calorie_position = (calorie_region[0] - 150, calorie_region[1] - 50)
+            img.paste(calorie_overlay, calorie_position, calorie_overlay)
+        
+        # Handle macro bar animations
+        for macro, color_hex, value in [
+            ("protein_bar", protein_color, protein),
+            ("carbs_bar", carbs_color, carbs),
+            ("fat_bar", fat_color, fat)
+        ]:
+            if macro in animations and animations[macro] > 0:
+                # Calculate bar fill based on animation progress
+                macro_key = macro.split("_")[0]  # Extract macro name (protein, carbs, fat)
+                bar_progress = animations[macro]
+                
+                # Convert color to RGB
+                color_rgb = hex_to_rgb(color_hex)
+                
+                # Get y position for this macro bar
+                y_pos = macro_bar_y.get(macro_key, 0)
+                
+                # Draw background bar (light gray)
                 draw.rectangle(
-                    [(margin, y_pos + 25), (margin + bar_width, y_pos + 25 + bar_height)],
-                    fill="#EEEEEE",
-                    outline=None,
-                    width=0
+                    (macro_bar_x_start, y_pos, macro_bar_x_start + macro_bar_width, y_pos + macro_bar_height),
+                    fill=(230, 230, 230, 255)
                 )
                 
-                # Draw filled bar
-                if value_width > 0:
-                    draw.rectangle(
-                        [(margin, y_pos + 25), (margin + value_width, y_pos + 25 + bar_height)],
-                        fill=color,
-                        outline=None,
-                        width=0
-                    )
-            
-            # Get macro bar animation progress
-            bar_progress = animations.get("macro_bars", 1.0)
-            
-            # Calculate max value for proportional bars
-            max_macro = max(food_item["protein"], food_item["carbs"], food_item["fat"])
-            
-            # Draw macro bars
-            draw_macro_bar(
-                bar_y_start,
-                "Protein",
-                food_item["protein"],
-                max_macro,
-                self.theme['colors']['macro']['protein'],
-                bar_progress
-            )
-            
-            draw_macro_bar(
-                bar_y_start + bar_spacing,
-                "Carbs",
-                food_item["carbs"],
-                max_macro,
-                self.theme['colors']['macro']['carbs'],
-                bar_progress
-            )
-            
-            draw_macro_bar(
-                bar_y_start + bar_spacing * 2,
-                "Fat",
-                food_item["fat"],
-                max_macro,
-                self.theme['colors']['macro']['fat'],
-                bar_progress
-            )
-            
-            # Add "Add to Log" button
-            button_y = bar_y_start + bar_spacing * 3 + 20
-            button_height = 60
-            draw.rectangle(
-                [(margin, button_y), (img.width - margin, button_y + button_height)],
-                fill=self.theme['colors']['text']['primary']['light'],
-                outline=None,
-                width=0
-            )
-            
-            # Add button text
-            button_font = self._get_font(20, bold=True)
-            button_text = "Add to Log"
-            text_width, text_height = button_font.getsize(button_text)
-            text_x = (img.width - text_width) // 2
-            text_y = button_y + (button_height - text_height) // 2
-            draw.text(
-                (text_x, text_y),
-                button_text,
-                fill=self.theme['colors']['background']['primary']['dark'],
-                font=button_font
-            )
+                # Calculate fill width based on animation progress and value
+                # Assuming a reasonable max value for scaling (adjust as needed)
+                max_values = {"protein": 50, "carbs": 100, "fat": 40}
+                max_value = max_values.get(macro_key, 100)
+                value_ratio = min(1.0, value / max_value)
+                fill_width = int(macro_bar_width * value_ratio * bar_progress)
+                
+                # Draw the colored fill bar
+                draw.rectangle(
+                    (macro_bar_x_start, y_pos, macro_bar_x_start + fill_width, y_pos + macro_bar_height),
+                    fill=color_rgb + (255,)  # Add alpha channel
+                )
+                
+                # Add value text if the bar has progressed enough
+                if bar_progress > 0.9:
+                    value_font = self._get_font(24, bold=True)
+                    value_text = f"{value}g"
+                    text_position = (macro_bar_x_start + macro_bar_width + 20, y_pos + macro_bar_height // 2)
+                    draw.text(text_position, value_text, fill=(0, 0, 0, 255), font=value_font, anchor="lm")
         
-        img.save(output_path)
-    
+        # Handle success indicator animation (checkmark or confirmation)
+        if "success_indicator" in animations and animations["success_indicator"] > 0:
+            success_progress = animations["success_indicator"]
+            
+            # Draw a checkmark or success message
+            success_text = "Added to today"
+            success_font = self._get_font(28, bold=True)
+            success_position = (width // 2, int(height * 0.85))
+            
+            # Animate appearance (fade in)
+            success_alpha = int(255 * success_progress)
+            success_color = (0, 170, 0, success_alpha)  # Green with animated opacity
+            
+            # Draw text with animated opacity
+            draw.text(success_position, success_text, fill=success_color, font=success_font, anchor="mm")
+            
+            # Optionally add checkmark icon
+            checkmark_radius = 15
+            checkmark_position = (width // 2 - 100, int(height * 0.85))
+            
+            # Draw circle background
+            draw.ellipse(
+                (checkmark_position[0] - checkmark_radius, checkmark_position[1] - checkmark_radius,
+                 checkmark_position[0] + checkmark_radius, checkmark_position[1] + checkmark_radius),
+                fill=(0, 170, 0, success_alpha)
+            )
+            
+            # Draw checkmark
+            check_width = int(checkmark_radius * 1.2)
+            check_height = int(checkmark_radius * 0.8)
+            
+            # Calculate checkmark points
+            point1 = (checkmark_position[0] - check_width//2, checkmark_position[1])
+            point2 = (checkmark_position[0] - check_width//4, checkmark_position[1] + check_height//2)
+            point3 = (checkmark_position[0] + check_width//2, checkmark_position[1] - check_height//2)
+            
+            # Draw checkmark line
+            draw.line([point1, point2, point3], fill=(255, 255, 255, success_alpha), width=3)
+
     def _get_font(self, size, bold=False):
         """Get a font with the specified size."""
         try:
