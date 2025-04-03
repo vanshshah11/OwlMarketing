@@ -148,8 +148,16 @@ class WanAvatarGenerator:
             logger.warning(f"Style '{style}' not found for avatar '{avatar_name}'. Using default.")
             style = "default" if "default" in variations else list(variations.keys())[0]
         
-        style_config = variations[style]
-        prompts = style_config.get("prompts", [])
+        # Get the prompt for this style
+        style_prompt = variations[style]
+        
+        # Check if the style_prompt is a string or a dictionary
+        if isinstance(style_prompt, dict) and "prompts" in style_prompt:
+            # It's a dictionary with prompts
+            prompts = style_prompt.get("prompts", [])
+        else:
+            # It's a string or doesn't have prompts key, treat it as a single prompt
+            prompts = [style_prompt]
         
         if not prompts:
             logger.error(f"No prompts found for avatar '{avatar_name}' with style '{style}'")

@@ -81,7 +81,10 @@ def fetch_tiktok_commercial_tracks(category: str = None) -> List[Dict]:
     Returns:
         List of track data dictionaries with download URLs
     """
-    if not RAPIDAPI_KEY:
+    # Check for RapidAPI key in environment variables first
+    api_key = os.environ.get("RAPIDAPI_KEY", RAPIDAPI_KEY)
+    
+    if not api_key:
         logger.warning("No RapidAPI key found. Using fallback commercial library.")
         return []
     
@@ -92,10 +95,11 @@ def fetch_tiktok_commercial_tracks(category: str = None) -> List[Dict]:
             url += f"?category={category}"
             
         headers = {
-            "X-RapidAPI-Key": RAPIDAPI_KEY,
+            "X-RapidAPI-Key": api_key,
             "X-RapidAPI-Host": "tiktok-trending-songs.p.rapidapi.com"
         }
         
+        logger.info(f"Fetching commercial tracks from TikTok API with category: {category}")
         response = requests.get(url, headers=headers)
         response.raise_for_status()
         
@@ -140,15 +144,19 @@ def fetch_trending_tracks() -> Dict[str, List[Dict]]:
         "upbeat_viral": []
     }
     
-    if RAPIDAPI_KEY:
+    # Check for RapidAPI key in environment variables first
+    api_key = os.environ.get("RAPIDAPI_KEY", RAPIDAPI_KEY)
+    
+    if api_key:
         try:
             # Using RapidAPI's TikTok Trends API
             url = "https://tiktok-trending-video-and-music.p.rapidapi.com/music/trending"
             headers = {
-                "X-RapidAPI-Key": RAPIDAPI_KEY,
+                "X-RapidAPI-Key": api_key,
                 "X-RapidAPI-Host": "tiktok-trending-video-and-music.p.rapidapi.com"
             }
             
+            logger.info("Fetching trending tracks from TikTok API")
             response = requests.get(url, headers=headers)
             response.raise_for_status()
             

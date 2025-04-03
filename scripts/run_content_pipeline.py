@@ -531,86 +531,119 @@ class ContentPipeline:
             return None
 
 def main():
-    """Main entry point for the content pipeline runner."""
-    parser = argparse.ArgumentParser(description="OWLmarketing Content Pipeline Runner")
+    """Parse arguments and run the content pipeline."""
+    parser = argparse.ArgumentParser(description='OWLmarketing Content Pipeline Runner')
     
-    # Add arguments
-    parser.add_argument("--output-dir", type=str, help="Output directory for generated content")
-    parser.add_argument("--config-file", type=str, help="Configuration file path")
-    parser.add_argument("--wan-model-dir", type=str, help="Path to Wan 2.1 T2V model directory")
-    parser.add_argument("--avatar-name", type=str, help="Specific avatar to use")
-    parser.add_argument("--script-count", type=int, help="Number of scripts to generate")
-    parser.add_argument("--video-count", type=int, help="Number of videos to generate")
-    parser.add_argument("--gpu-type", type=str, choices=["L4", "T4"], default="L4", 
-                        help="GPU type to optimize for (L4 or T4)")
-    parser.add_argument("--resolution", type=str, choices=["480p", "720p", "1080p"], 
-                        help="Video resolution")
-    parser.add_argument("--archive", action="store_true", help="Archive videos for easier transfer to local machine")
-    parser.add_argument("--no-schedule", action="store_true", help="Skip scheduling/posting")
-    parser.add_argument("--rapidapi-key", type=str, help="RapidAPI key for TikTok API access")
-    parser.add_argument("--no-trending-music", action="store_true", 
-                        help="Disable trending music and use default background music")
+    # Output directory
+    parser.add_argument('--output-dir', type=str, 
+                        help='Directory to store generated content')
     
+    # Configuration
+    parser.add_argument('--config', type=str,
+                        help='Path to configuration file (JSON)')
+    
+    # Avatar selection
+    parser.add_argument('--avatar-name', type=str,
+                        help='Specific avatar to use for video generation')
+    
+    # Content generation
+    parser.add_argument('--script-count', type=int, default=3,
+                        help='Number of scripts to generate')
+    parser.add_argument('--video-count', type=int, default=None,
+                        help='Number of videos to generate (defaults to script count)')
+    
+    # Video options
+    parser.add_argument('--resolution', type=str, choices=['720p', '1080p'], default='720p',
+                        help='Video resolution')
+    
+    # GPU options
+    parser.add_argument('--gpu-type', type=str, choices=['L4', 'T4', 'V100'], default='L4',
+                        help='GPU type for optimal generation settings')
+    
+    # Music options
+    parser.add_argument('--use-trending-music', action='store_true',
+                        help='Use trending TikTok music instead of commercial library')
+    
+    # Schedule options
+    parser.add_argument('--schedule', action='store_true',
+                        help='Schedule posts automatically')
+    
+    # RapidAPI key for TikTok music
+    parser.add_argument('--rapidapi-key', type=str,
+                        help='RapidAPI key for TikTok API access')
+
+    # Archive options
+    parser.add_argument('--archive', action='store_true',
+                        help='Create a ZIP archive of generated videos')
+    
+    # Parse arguments
     args = parser.parse_args()
     
-    try:
-        # Run pipeline
-        pipeline = ContentPipeline(
-            output_dir=args.output_dir,
-            config_file=args.config_file,
-            wan_model_dir=args.wan_model_dir,
-            gpu_type=args.gpu_type,
-            rapidapi_key=args.rapidapi_key
-        )
+    # Ensure RAPIDAPI_KEY is set in environment variables first
+    if args.rapidapi_key:
+        os.environ["RAPIDAPI_KEY"] = args.rapidapi_key
+        logger.info(f"Set RAPIDAPI_KEY environment variable with provided key")
+    
+    # Initialize pipeline
+    pipeline = ContentPipeline(
+        output_dir=args.output_dir,
+        config_file=args.config,
+        gpu_type=args.gpu_type,
+        rapidapi_key=args.rapidapi_key
+    )
+    
+    # Run pipeline
+    pipeline.run_full_pipeline(
+        avatar_name=args.avatar_name,
+        script_count=args.script_count,
+        video_count=args.video_count,
+        schedule=args.schedule,
+        use_trending_music=args.use_trending_music
+    )
+    
+    # Archive videos if requested
+    if args.archive:
+        import zipfile
+        import glob
         
-        # Run full pipeline
-        pipeline.run_full_pipeline(
-            avatar_name=args.avatar_name,
-            script_count=args.script_count,
-            video_count=args.video_count,
-            schedule=not args.no_schedule,
-            use_trending_music=not args.no_trending_music
-        )
+        logger.info(f"Archiving videos to {pipeline.output_dir}/videos_archive.zip")
         
-        # Archive videos for easier download if requested
-        if args.archive:
-            archive_path = os.path.join(args.output_dir or pipeline.output_dir, "videos_archive.zip")
-            logger.info(f"Archiving videos to {archive_path}")
+        # Create archive
+        with zipfile.ZipFile(f"{pipeline.output_dir}/videos_archive.zip", 'w') as zipf:
+            # Add all videos from output directory
+            video_files = glob.glob(f"{pipeline.videos_dir}/**/*.mp4", recursive=True)
+            for video in video_files:
+                # Use relative path within the archive
+                arcname = os.path.relpath(video, pipeline.output_dir)
+                zipf.write(video, arcname)
             
-            import zipfile
-            with zipfile.ZipFile(archive_path, 'w') as zipf:
-                videos_dir = os.path.join(args.output_dir or pipeline.output_dir, "videos")
-                for root, _, files in os.walk(videos_dir):
-                    for file in files:
-                        if file.endswith(('.mp4', '.mov')):
-                            zipf.write(
-                                os.path.join(root, file),
-                                os.path.relpath(os.path.join(root, file), videos_dir)
-                            )
+            # Add metadata
+            with open(f"{pipeline.output_dir}/metadata.json", 'w') as f:
+                json.dump({
+                    "generated_date": datetime.now().isoformat(),
+                    "avatar_name": args.avatar_name,
+                    "script_count": args.script_count,
+                    "video_count": args.video_count or args.script_count,
+                    "resolution": args.resolution,
+                    "gpu_type": args.gpu_type,
+                }, f, indent=2)
             
-            logger.info(f"Videos archived to {archive_path}")
-            logger.info(f"To download to your local machine, use:")
-            logger.info(f"scp username@vm-ip:{archive_path} /path/on/local/machine/")
-            
-            # Also create a transfer script for convenience
-            transfer_script = os.path.join(args.output_dir or pipeline.output_dir, "transfer_videos.sh")
-            with open(transfer_script, 'w') as f:
-                f.write("#!/bin/bash\n")
-                f.write("# Run this script on your local machine to download videos\n")
-                f.write(f"# Replace USERNAME and VM_IP with your actual values\n\n")
-                f.write(f"scp USERNAME@VM_IP:{archive_path} ./videos_archive.zip\n")
-                f.write("echo 'Videos downloaded successfully!'\n")
-            
-            os.chmod(transfer_script, 0o755)
-            logger.info(f"Created transfer script at {transfer_script}")
+            zipf.write(f"{pipeline.output_dir}/metadata.json", "metadata.json")
         
-        logger.info("Pipeline completed successfully")
-        return 0
+        logger.info(f"Videos archived to {pipeline.output_dir}/videos_archive.zip")
+        logger.info("To download to your local machine, use:")
+        logger.info(f"scp username@vm-ip:{pipeline.output_dir}/videos_archive.zip /path/on/local/machine/")
         
-    except Exception as e:
-        logger.error(f"Error running pipeline: {e}")
-        traceback.print_exc()
-        return 1
+        # Create a transfer script for convenience
+        with open(f"{pipeline.output_dir}/transfer_videos.sh", 'w') as f:
+            f.write(f"#!/bin/bash\n")
+            f.write(f"# Transfer video archive to local machine\n")
+            f.write(f"# Run this command on your local machine:\n")
+            f.write(f"# scp username@vm-ip:{pipeline.output_dir}/videos_archive.zip ./\n")
+        
+        logger.info(f"Created transfer script at {pipeline.output_dir}/transfer_videos.sh")
+    
+    logger.info("Pipeline completed successfully")
 
 if __name__ == "__main__":
     sys.exit(main())
